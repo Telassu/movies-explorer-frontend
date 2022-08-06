@@ -1,0 +1,26 @@
+.nav__links {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: row;
+}
+
+.nav__link {
+  height: 36px;
+  width: 96px;
+  background-color: #303030;
+  border-radius: 10px;
+  text-align: center;
+  padding-top: 2%;
+  margin-left: 10px;
+  box-sizing: border-box;
+}
+
+.nav__button {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+}

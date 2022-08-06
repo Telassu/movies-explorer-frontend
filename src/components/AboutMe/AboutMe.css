@@ -1,0 +1,65 @@
+.student {
+  width: calc(100% - 140px);
+  max-width: 1140px;
+  min-height: 544px;
+  margin-top: 110px;
+}
+
+.student__title {
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 27px;
+  margin: 0 auto 23px;
+}
+
+.student__info {
+  border-top: 1px solid #dadada;
+  box-sizing: border-box;
+  padding-top: 66px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.student__info-title {
+  font-weight: 400;
+  font-size: 50px;
+  line-height: 58px;
+  margin: 0;
+}
+
+.student__info-subtitle {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 20px;
+  margin: 18px 0 26px;
+}
+
+.student__info-text {
+  max-width: 600px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22px;
+}
+
+.student__links {
+  padding: 0;
+  margin: 99px 0 0;
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+}
+
+.studen__link {
+  color: #fff;
+  text-decoration: none;
+  margin-right: 20px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+}
+
+.student__photo {
+  width: 270px;
+  height: 327px;
+  object-fit: cover;
+}

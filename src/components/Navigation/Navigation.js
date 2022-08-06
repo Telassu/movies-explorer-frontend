@@ -7,13 +7,13 @@ function Navigation() {
       <Switch>
         <Route exact path="/">
           <ul className="navigation__links navigation__links_not-login">
-            <li className="navigation__link">
-              <Link to="/signup" className="navigation__button navigation__button_register">
+            <li className="navigation__button">
+              <Link to="/signup" className="navigation__link">
                 Регистрация
               </Link>
             </li>
-            <li className="navigation__link">
-              <Link to="/signin" className="navigation__button navigation__button_enter">
+            <li className="navigation__button navigation__button_login">
+              <Link to="/signin" className="navigation__link navigation__link_login">
                 Войти
               </Link>
             </li>
@@ -21,14 +21,14 @@ function Navigation() {
         </Route>
 
         <Route path="*">
-          <ul className="navigation__links navigation__links_login">
+          <ul className="navigation__button navigation__button_movies">
             <li className="navigation__link">
-              <Link to="/movies" className="navigation__button navigation__button_movies">
+              <Link to="/movies" className="navigation__links navigation__links_login">
                 Фильмы
               </Link>
             </li>
-            <li className="navigation__link">
-              <Link to="/saved-movies" className="navigation__button navigation__button_saved-movies">
+            <li className="navigation__button navigation__button_saved-movies">
+              <Link to="/saved-movies" className="navigation__link">
                 Сохранённые фильмы 
               </Link>
             </li>

@@ -3,6 +3,7 @@ import { Route, Switch } from "react-router-dom";
 import Login from "../Login/Login";
 
 import Main from "../Main/Main";
+import Movies from "../Movies/Movies";
 import PageNotFound from "../PageNotFound/PageNotFound";
 import Profile from "../Profile/Profile";
 import Register from "../Register/Register";
@@ -14,7 +15,9 @@ return (
       <Route exact path="/">
         <Main />
       </Route>
-      <Route path="/movies"></Route>
+      <Route path="/movies">
+        <Movies />
+      </Route>
       <Route path="/saved-movies"></Route>
       <Route path="/profile">
         <Profile />

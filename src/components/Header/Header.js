@@ -6,12 +6,12 @@ import Navigation from "../Navigation/Navigation";
 
 function Header() {
   return (
-    <div className="header">
+    <header className="header">
       <Link to="/">
-        <img src={Logo} alt="Логотип" className="logo" />
+        <img src={Logo} alt="Логотип" className="header__logo" />
       </Link>
       <Navigation />
-    </div>
+    </header>
   );
 };
 
