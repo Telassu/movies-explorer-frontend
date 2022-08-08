@@ -1,5 +1,19 @@
-<label class="checkbox__label">
-    <input type="checkbox" id="" class="checkbox" checked />
-    <span class="visible-checkbox"></span>
-    <span class="checkbox__label-text">Короткометражки</span>
-</label>
+import React from "react"
+
+function FilterCheckbox() {
+
+  return (
+    <label className="checkbox__label">
+      <input
+        type="checkbox"
+        id="checkbox"
+        className="checkbox"
+        defaultChecked={true}
+      />
+      <span className="visible-checkbox"></span>
+      <span className="checkbox__label-text">Короткометражки</span>
+    </label>
+  );
+};
+
+export default FilterCheckbox;

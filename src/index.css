@@ -1,6 +1,5 @@
 div, img, p, section, li {
 border: 1px solid red;
-color: white;
 }
 
 @import url(./vendor/normalize.css);
@@ -25,3 +24,5 @@ color: white;
 @import url(./components/MoviesCardList/MoviesCardlist.css);
 @import url(./components/MoviesCard/MoviesCard.css);
 @import url(./components/FilterCheckbox/FilterCheckbox.css);
+@import url(./components/SearchForm/SearchForm.css);
+@import url(./components/SavedMovies/SavedMovies.css);

@@ -21,22 +21,22 @@ function Navigation() {
         </Route>
 
         <Route path="*">
-          <ul className="navigation__button navigation__button_movies">
-            <li className="navigation__link">
-              <Link to="/movies" className="navigation__links navigation__links_login">
+          <ul className="navigation__links navigation__links_login">
+            <li className="navigation__button">
+              <Link to="/movies" className="navigation__link">
                 Фильмы
               </Link>
-            </li>
-            <li className="navigation__button navigation__button_saved-movies">
               <Link to="/saved-movies" className="navigation__link">
-                Сохранённые фильмы 
+                Сохранённые фильмы
               </Link>
             </li>
+            <li className="navigation__button navigation__button_account">
+              <Link to="/profile" className="navigation__link">Аккаунт</Link>
+            </li>
           </ul>
-          <button className="navigation__account"><Link to="/profile">Аккаунт</Link></button>
         </Route>
       </Switch>
-  </section>
+    </section>
   )
 };
 

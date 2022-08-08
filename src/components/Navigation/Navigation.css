@@ -7,6 +7,7 @@
   flex-direction: row;
   justify-content: end;
   list-style: none;
+  padding: 0;
 }
 
 .navigation__button {
@@ -29,8 +30,24 @@
   font-weight: 500;
   font-size: 12px;
   line-height: 16px;
+  margin: auto 8px;
 }
 
 .navigation__link_login {
   color: #000;
+}
+
+.navigation__links_login {
+  justify-content: space-between;
+}
+
+.navigation__button_account {
+  width: 100px;
+  height: 32px;
+  border-radius: 20px;
+  background-color: #313131;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  text-align: center;
 }

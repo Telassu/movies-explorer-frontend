@@ -1,6 +1,7 @@
 .form-container {
   width: 396px;
   min-height: 266px;
+  margin: auto;
 }
 
 .logo {
@@ -37,6 +38,7 @@
   font-size: 13px;
   line-height: 16px;
   margin: 10px 0;
+  box-sizing: border-box;
 }
 
 .input:first-child {

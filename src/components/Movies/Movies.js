@@ -1,16 +1,21 @@
 import React from "react";
+
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import MoviesCardlist from "../MoviesCardList/MoviesCardlis";
+import SearchForm from "../SearchForm/SearchForm";
 
-function Movies(props) {
+function Movies() {
   return (
-    <div className="movies-page">
+    <>
       <Header />
-      <MoviesCardlist />
-      <button className="movies-page__button">Еще</button>
+      <div className="movies-page">
+        <SearchForm />
+        <MoviesCardlist />
+        <button className="movies-page__button" type="submit" aria-label="ещё">Еще</button>
+      </div>
       <Footer />
-    </div>
+    </>
   );
 };
 
