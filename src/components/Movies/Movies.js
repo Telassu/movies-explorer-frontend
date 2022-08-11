@@ -12,7 +12,7 @@ function Movies() {
       <div className="movies-page">
         <SearchForm />
         <MoviesCardlist />
-        <button className="movies-page__button" type="submit" aria-label="ещё">Еще</button>
+        <button className="movies-page__button" type="button" aria-label="показать ещё">Еще</button>
       </div>
       <Footer />
     </>

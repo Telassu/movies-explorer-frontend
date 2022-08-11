@@ -43,9 +43,12 @@
   margin: 0;
   padding: 0;
   list-style: none;
-  display: flex;
-  flex-direction: row;
+  display: grid;
   justify-content: center;
+  grid-template-columns: repeat(auto-fit, 84px);
+  grid-template-rows: 1fr;
+  gap: 10px;
+  grid-auto-flow: row;
 }
 
 .techs__icon {
@@ -60,4 +63,10 @@
   text-align: center;
   padding-top: 21px;
   margin-right: 10px;
+}
+
+@media screen and (max-width: 1250px) {
+  .techs {
+    padding: 100px 50px;
+  }  
 }

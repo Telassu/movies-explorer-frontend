@@ -15,6 +15,10 @@
   border-radius: 6px;
 }
 
+.movie__image:hover {
+  cursor: pointer;
+}
+
 .movie__save-button{
   width: 72px;
   height: 21px;
@@ -31,8 +35,12 @@
   right: 14px;
 }
 
+.movie__save-button:hover {
+  cursor: pointer;
+}
+
 .movie__save-button_hidden{
-  display: none;
+  visibility: hidden;
 }
 
 .movie__saved{
@@ -59,7 +67,7 @@
   font-weight: 500;
   font-size: 13px;
   line-height: 16px;
-  margin: 0;
+  margin: 0 14px;
 }
 
 .movie__time-container {

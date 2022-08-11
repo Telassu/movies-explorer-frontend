@@ -2,7 +2,7 @@
   width: calc(100% - 140px);
   max-width: 1140px;
   min-height: 310px;
-  margin-bottom: 110px;
+  margin-bottom: 29px;
 }
 
 .portfolio__title {
@@ -22,7 +22,7 @@
 .portfolio__element {
   box-sizing: border-box;
   border-bottom: 1px solid #424242;
-  padding: 19px;
+  padding-bottom: 25px;
 }
 
 .portfolio__link {
@@ -30,6 +30,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.portfolio__link:hover {
+  opacity: 0.7;
+  cursor: pointer;
 }
 
 .portfolio__name {
@@ -45,6 +50,17 @@
 }
 
 .portfolio__icon {
-  width: 29px;
+  width: 20px;
   height: 60px;
+}
+
+@media screen and (max-width: 1250px) {
+  .portfolio {
+    width: calc(100% - 100px);
+  }  
+
+  .portfolio__name {
+    font-size: 28px;
+  }
+  
 }

@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 import Header from "../Header/Header";
 
@@ -39,7 +38,7 @@ function Profile(props) {
       </form>
       <div className="profile__buttons">
         <button type="submit" className="profile__button">Редактировать</button>
-        <Link to="/" className="profile__link">Выйти из аккаунта</Link>
+        <button type="submit" className="profile__button profile__button_exit">Выйти из аккаунта</button>
       </div>
     </>
   );

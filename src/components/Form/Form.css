@@ -58,6 +58,11 @@
   margin-top: 59px;
 }
 
+.form__save-button:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
 .form__text {
   font-weight: 400;
   font-size: 14px;
@@ -73,4 +78,9 @@
   line-height: 17px;
   color: #4285f4;
   text-decoration: none;
+}
+
+.form__link:hover {
+  opacity: 0.8;
+  cursor: pointer;
 }

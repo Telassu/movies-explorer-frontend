@@ -1,7 +1,6 @@
 .movies-page {
   width: calc(100% - 140px);
   max-width: 1140px;
-  height: 100vh;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -19,5 +18,21 @@
   font-size: 12px;
   line-height: 14px;
   text-align: center;
-  margin-top: 50px;
+}
+
+.movies-page__button:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 1250px) {
+  .movies-page {
+    width: calc(100% - 60px);
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .movies-page {
+    width: calc(100% - 20px);
+  }
 }

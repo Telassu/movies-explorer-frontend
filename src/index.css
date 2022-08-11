@@ -1,6 +1,6 @@
-div, img, p, section, li {
+/*div, img, p, section, li {
 border: 1px solid red;
-}
+}*/
 
 @import url(./vendor/normalize.css);
 @import url(./vendor/Fonts/fonts.css);

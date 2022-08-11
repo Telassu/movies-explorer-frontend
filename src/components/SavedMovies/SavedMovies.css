@@ -7,3 +7,16 @@
     flex-direction: column;
     align-items: center;
   }
+
+  
+@media screen and (max-width: 1250px) {
+  .saved-movies {
+    width: calc(100% - 60px);
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .saved-movies {
+    width: calc(100% - 20px);
+  }
+}
