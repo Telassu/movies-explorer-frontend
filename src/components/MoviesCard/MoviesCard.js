@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Example from "../../images/example_movie.png";
 import CardButton from "../CardButton/CardButton";
 
-function MoviesCard(props) {
+function MoviesCard() {
   const [isButton, setIsButton] = useState(true);
 
   const showButton = () => {

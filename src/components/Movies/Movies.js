@@ -10,11 +10,16 @@ function Movies() {
   return (
     <>
       <Header />
-      <div className="movies-page">
+      <section className="movies-page">
         <SearchForm />
         <MoviesCardlist />
-        <button className="movies-page__button" type="button" aria-label="показать ещё">Еще</button>
-      </div>
+        <button
+          className="movies-page__button"
+          type="button"
+          aria-label="показать ещё">
+          Еще
+        </button>
+      </section>
       <Footer />
     </>
   );
