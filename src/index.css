@@ -26,3 +26,4 @@ border: 1px solid red;
 @import url(./components/FilterCheckbox/FilterCheckbox.css);
 @import url(./components/SearchForm/SearchForm.css);
 @import url(./components/SavedMovies/SavedMovies.css);
+@import url(./components/CardButton/CardButton.css);

@@ -21,7 +21,7 @@ function Login() {
         placeholder="E-mail"
         required
       />
-      <span className="login__input-error email-input-error"></span>
+      <span className="input-error login__input-error email-input-error"></span>
       <span className="input-caption login__input-caption">Пароль</span>
       <input
         type="password"
@@ -31,7 +31,7 @@ function Login() {
         placeholder="Пароль"
         required
       />
-      <span className="login__input-error password-input-error"></span>
+      <span className="input-error login__input-error password-input-error"></span>
     </Form>
   );
 };

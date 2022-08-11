@@ -6,6 +6,7 @@ import MoviesCardlist from "../MoviesCardList/MoviesCardlis";
 import SearchForm from "../SearchForm/SearchForm";
 
 function Movies() {
+
   return (
     <>
       <Header />

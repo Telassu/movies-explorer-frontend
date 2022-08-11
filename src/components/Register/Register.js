@@ -23,7 +23,7 @@ function Register() {
         maxLength="30"
         required
       />
-      <span className="auth__input-error name-input-error"></span>
+      <span className="input-error auth__input-error name-input-error"></span>
       <span className="input-caption auth__input-caption">E-mail</span>
       <input
         type="email"
@@ -33,7 +33,7 @@ function Register() {
         placeholder="E-mail"
         required
       />
-      <span className="auth__input-error email-input-error"></span>
+      <span className="input-error auth__input-error email-input-error"></span>
       <span className="input-caption auth__input-caption">Пароль</span>
       <input
         type="password"
@@ -43,7 +43,7 @@ function Register() {
         placeholder="Пароль"
         required
       />
-      <span className="auth__input-error password-input-error"></span>
+      <span className="input-error auth__input-error password-input-error"></span>
     </Form>
   );
 };
