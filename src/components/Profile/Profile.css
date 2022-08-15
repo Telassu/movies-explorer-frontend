@@ -117,16 +117,13 @@
 }
 
 @media screen and (max-width: 430px) {
-  .profile {
-    justify-content: space-between;
-    padding-top: 70px;
-  }
 
   .profile__title {
-    margin: 0;
+    margin-bottom: 80px;
   }
   .profile__form {
     width: calc(100% - 30px);
+    height: calc(100% - 250px);
   }
 
   .profile__label {
