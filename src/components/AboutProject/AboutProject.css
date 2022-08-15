@@ -90,20 +90,43 @@
 @media screen and (max-width: 1250px) {
   .project {
     width: calc(100% - 100px);
-    margin-top: 20px;
+    margin-top: 90px;
+  }
+
+  .project__info-text {
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .project__line_backend {
+    width: 140px;
+  }
+  
+  .project__line_frontend {
+    width: 528px;
+  } 
+  
+  .project__caption_backend {
+    width: 140px;
+  }
+  
+  .project__caption_frontend {
+    width: 528px;
   }  
 }
 
 @media screen and (max-width: 350px) {
   .project {
     width: calc(100% - 28px);
-    margin-top: 14px;
+    box-sizing: border-box;
+    padding: 70px 0 93px;
+    margin: 0;
   }
   
   .project__title {
     font-size: 18px;
     line-height: 22px;
-    margin-top: 70px;
+    margin: 0;
   }
 
   .project__info-title {
@@ -119,5 +142,21 @@
   
   .project__info {
     margin-bottom: 60px;
+  }
+
+  .project__line_backend {
+    width: 100px;
+  }
+  
+  .project__line_frontend {
+    width: 184px;
+  } 
+  
+  .project__caption_backend {
+    width: 100px;
+  }
+  
+  .project__caption_frontend {
+    width: 184px;
   }
 }

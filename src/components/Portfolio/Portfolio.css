@@ -3,6 +3,10 @@
   max-width: 1140px;
   min-height: 310px;
   margin-bottom: 29px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
 
 .portfolio__title {
@@ -16,7 +20,6 @@
 .portfolio__list {
   list-style: none;
   padding: 0;
-  margin: 50px 0 0;
 }
 
 .portfolio__element {
@@ -63,4 +66,36 @@
     font-size: 28px;
   }
   
+}
+
+@media screen and (max-width: 350px) {
+  .portfolio {
+    width: calc(100% - 28px);
+    min-height: 362px;
+    padding-bottom: 70px;
+    margin: 0;
+  }
+  
+  .portfolio__title {
+    font-size: 14px;
+  }
+  
+  .portfolio__list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .portfolio__element {
+    padding-bottom: 19px;
+  }
+  
+  .portfolio__name {
+    font-size: 18px;
+    line-height: 28px;
+  }
+ 
+  .portfolio__icon {
+    width: 18px;
+    height: 28px;
+  }  
 }

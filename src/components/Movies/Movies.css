@@ -18,6 +18,7 @@
   font-size: 12px;
   line-height: 14px;
   text-align: center;
+  margin-bottom: 12px;
 }
 
 .movies-page__button:hover {
@@ -31,8 +32,12 @@
   }
 }
 
-@media screen and (max-width: 350px) {
+@media screen and (max-width: 650px) {
   .movies-page {
     width: calc(100% - 20px);
+  }
+
+  .movies-page__button {
+    width: 240px;
   }
 }

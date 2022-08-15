@@ -1,6 +1,5 @@
 .form-container {
   width: 396px;
-  min-height: 266px;
   margin: auto;
 }
 
@@ -19,6 +18,7 @@
 .form {
   display: flex;
   flex-direction: column;
+  height: 266px;
 }
 
 .input-caption {
@@ -26,6 +26,7 @@
   font-size: 10px;
   line-height: 12px;
   color: #8b8b8b;
+  margin: 3px 0;
 }
 
 
@@ -47,28 +48,45 @@
   line-height: 16px;
   margin: 10px 0;
   box-sizing: border-box;
+  padding-left: 15px;
+}
+
+.input:focus {
+  outline: 1px solid #3ddc84;
 }
 
 .input:first-child {
   margin-top: 0;
 }
 
+.form__buttons {
+  margin-bottom: 70px;
+}
+
 .form__save-button {
   width: 396px;
   height: 45px;
   border-radius: 3px;
+  border: none;
   background-color: #4285f4;
   color: #fff;
   font-weight: 500;
   font-size: 14px;
   line-height: 17px;
   text-align: center;
-  margin-top: 59px;
+  margin-top: 69px;
 }
 
 .form__save-button:hover {
   opacity: 0.8;
   cursor: pointer;
+}
+
+.form__save-button:disabled {
+  border: none;
+  background-color: #f8f8f8;
+  color: #c2c2c2;
+  cursor: default;
 }
 
 .form__text {
@@ -91,4 +109,53 @@
 .form__link:hover {
   opacity: 0.8;
   cursor: pointer;
+}
+
+.input-error {
+  color: #ee3465;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 12px;
+  margin: 12px;
+}
+
+@media screen and (max-width: 500px) {
+  .form-container {
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 56px;
+    margin-top: 0;
+  }
+  
+  .form {
+    width: calc(100% - 60px);
+    margin-top: 80px;
+  }
+
+  .form__save-button {
+    width: 260px;
+    margin: 0;   
+  }
+
+  .form__title {
+    margin-top: 50px;
+  }
+
+  .form__text {
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+  .form__link {
+    font-size: 12px;
+    line-height: 15px;
+  }  
+
+  .form__buttons {
+    margin-bottom: 30px;
+  }
 }

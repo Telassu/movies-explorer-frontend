@@ -53,3 +53,14 @@
   line-height: 10px;
   padding: 3px 4px;
 }
+
+@media screen and (max-width: 350px) {
+  .movie__image{
+    height: 168px;
+    width: 300px;
+  }
+  
+  .movie {
+    width: calc(100% - 20px);
+  }
+}
