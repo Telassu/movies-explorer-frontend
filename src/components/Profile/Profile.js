@@ -34,7 +34,7 @@ function Profile(props) {
   return (
     <>
       <Header />
-      <section className="profile">
+      <main className="profile">
         <h1 className="profile__title">Привет, {props.name || 'Виталий'}!</h1>
         <form className="profile__form" name="profile" onSubmit={handleFormSubmit}>
           <div>
@@ -80,7 +80,7 @@ function Profile(props) {
             >Сохранить</button>
           </div>
         </form>
-      </section>
+      </main>
     </>
   );
 };

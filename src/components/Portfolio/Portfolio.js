@@ -12,12 +12,12 @@ function Portfolio() {
             <img className="portfolio__icon" alt="иконка для перехода на репозиторий" src={linkIcon}></img></a>
         </li>
         <li className="portfolio__element">
-          <a href="https://github.com/Telassu/russian-travel" target="_blank" rel="noreferrer" className="portfolio__link">
+          <a href="https://telassu.github.io/russian-travel/" target="_blank" rel="noreferrer" className="portfolio__link">
             <p className="portfolio__name">Адаптивный сайт</p>
             <img className="portfolio__icon" alt="иконка для перехода на репозиторий" src={linkIcon}></img></a>
         </li>
         <li className="portfolio__element">
-          <a href="https://github.com/Telassu/react-mesto-api-full" target="_blank" rel="noreferrer" className="portfolio__link">
+          <a href="http://chuhonina.students.nomoredomains.xyz/sign-in" target="_blank" rel="noreferrer" className="portfolio__link">
             <p className="portfolio__name">Однстраничное приложение</p>
             <img className="portfolio__icon" alt="иконка для перехода на репозиторий" src={linkIcon}></img>
           </a>

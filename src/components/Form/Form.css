@@ -136,14 +136,18 @@
     width: calc(100% - 60px);
     height: calc(100vh - 250px);
     justify-content: space-between;
+    align-items: center;
     margin-top: 40px;
   }
 
   .form__save-button {
-    width: 260px;
+    width: 100%;
     margin: 0;   
   }
 
+  .form__buttons {
+    width: 100%;
+  }
   .form__title {
     margin-top: 50px;
   }

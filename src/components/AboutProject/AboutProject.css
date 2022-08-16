@@ -99,23 +99,15 @@
   }
 
   .project__line_backend {
-    width: 140px;
+    min-width: 140px;
   }
-  
-  .project__line_frontend {
-    width: 528px;
-  } 
   
   .project__caption_backend {
-    width: 140px;
-  }
-  
-  .project__caption_frontend {
-    width: 528px;
+    min-width: 140px;
   }  
 }
 
-@media screen and (max-width: 350px) {
+@media screen and (max-width: 698px) {
   .project {
     width: calc(100% - 28px);
     box-sizing: border-box;
@@ -145,18 +137,10 @@
   }
 
   .project__line_backend {
-    width: 100px;
+    min-width: 100px;
   }
-  
-  .project__line_frontend {
-    width: 184px;
-  } 
-  
+
   .project__caption_backend {
-    width: 100px;
-  }
-  
-  .project__caption_frontend {
-    width: 184px;
+    min-width: 100px;
   }
 }

@@ -139,13 +139,13 @@
 .burger__close-button {
   width: 22px;
   height: 22px;
-  background-image: url(../../images/closeMenu.svg);;
-  background-color: #202020;
+  background-image: url(../../images/closeMenu.svg);
+  background-color: rgba(0, 0, 0, 0);
   background-size: cover;
   border: none;
   padding: 0;
   margin: 22.5px 22.5px 0 auto;
-  z-index: 4;
+  z-index: 2;
 }
 
 .burger__close-button:hover {

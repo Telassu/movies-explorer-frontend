@@ -10,13 +10,15 @@ import Portfolio from "../Portfolio/Portfolio";
 function Main() {
   return (
     <>
-    <Header />
-    <Promo />
-    <AboutProject />
-    <Techs />
-    <AboutMe />
-    <Portfolio />
-    <Footer />
+      <Header />
+      <main className="main">
+        <Promo />
+        <AboutProject />
+        <Techs />
+        <AboutMe />
+        <Portfolio />
+      </main>
+      <Footer />
     </>
   );
 };

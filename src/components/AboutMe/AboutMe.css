@@ -152,7 +152,7 @@ flex-direction: column-reverse;  }
   }
 
   .student__info-text-container {
-    max-width: 392px;
+    max-width: 100%;
   }
    
   .student__info-text {

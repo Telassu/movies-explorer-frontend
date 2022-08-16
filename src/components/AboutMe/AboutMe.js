@@ -17,7 +17,7 @@ function AboutMe() {
             с постоянной работы.</p>
           <ul className="student__links">
             <li><a href="https://facebook.com/" className="studen__link" target="_blank" rel="noreferrer">Facebook</a></li>
-            <li><a href="https://github.com/" className="studen__link" target="_blank" rel="noreferrer">Github</a></li>
+            <li><a href="https://github.com/Telassu" className="studen__link" target="_blank" rel="noreferrer">Github</a></li>
           </ul>
         </div>
         <img className="student__photo" src={Photo} alt="фотография" />

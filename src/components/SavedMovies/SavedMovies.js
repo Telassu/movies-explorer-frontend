@@ -9,10 +9,10 @@ function SavedMovies() {
   return (
     <>
       <Header />
-      <section className="saved-movies">
+      <main className="saved-movies">
         <SearchForm />
         <MoviesCardlist />
-      </section>
+      </main>
       <Footer />
     </>
   )

@@ -10,7 +10,7 @@ function Movies() {
   return (
     <>
       <Header />
-      <section className="movies-page">
+      <main className="movies-page">
         <SearchForm />
         <MoviesCardlist />
         <button
@@ -19,7 +19,7 @@ function Movies() {
           aria-label="показать ещё">
           Еще
         </button>
-      </section>
+      </main>
       <Footer />
     </>
   );
