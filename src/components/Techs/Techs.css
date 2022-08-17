@@ -1,0 +1,124 @@
+.techs {
+  width: 100%;
+  max-width: 1280px;
+  min-height: 625px;
+  box-sizing: border-box;
+  padding: 100px 70px;
+  background-color: #272727;
+  display: flex;
+  flex-direction: column;
+}
+
+.techs__title {
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 27px;
+  margin-bottom: 23px;
+}
+
+.techs__info {
+  border-top: 1px solid #dadada;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 100px;
+}
+
+.techs__info-title {
+  font-weight: 400;
+  font-size: 50px;
+  line-height: 58px;
+  margin: 90px 0 26px;
+}
+
+.techs__info-text {
+  max-width: 500px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  margin: 0;
+  text-align: center;
+}
+
+.techs__icons {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  justify-content: center;
+  grid-template-columns: repeat(auto-fit, 84px);
+  grid-template-rows: 1fr;
+  gap: 10px;
+  grid-auto-flow: row;
+}
+
+.techs__icon {
+  box-sizing: border-box;
+  width: 90px;
+  height: 60px;
+  border-radius: 10px;
+  background-color: #303030;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  padding-top: 21px;
+  margin-right: 10px;
+}
+
+@media screen and (max-width: 1250px) {
+  .techs {
+    padding: 90px 50px;
+  }  
+
+  .techs__info-text {
+/*    max-width: 500px;*/
+    font-size: 12px;
+    line-height: 18px;
+  }  
+
+  .techs__icon {
+    width: 84px;
+    height: 57px;
+    font-size: 12px;
+    line-height: 15px;
+  }  
+}
+
+@media screen and (max-width: 650px) {
+  .techs {
+    width: 100%;
+    padding: 30px 0;
+    background-color: #202020;
+  }
+  
+  .techs__title {
+    font-size: 18px;
+    line-height: 22px;
+    margin: 0 18px 28px;
+  }
+  
+  .techs__info {
+    border-top: 1px solid #000;
+    width: calc(100% - 36px);
+    margin: 0 auto;
+  }
+  
+  .techs__info-title {
+    font-size: 30px;
+    line-height: 36px;
+    margin: 60px auto 24px;
+  }
+  
+  .techs__info-text {
+    max-width: 500px;
+    font-size: 11px;
+    line-height: 16px;
+    margin: 0 auto 50px;
+  }
+  
+  .techs__icons {
+    padding: 0 26px;
+  }  
+}

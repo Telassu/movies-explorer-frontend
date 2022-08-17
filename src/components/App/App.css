@@ -1,0 +1,14 @@
+.page {
+  max-width: 100vw;
+  min-height: 100vh;
+  box-sizing: border-box;
+  background-color: #202020;
+  margin: 0 auto;
+  font-family: 'Inter', 'Arial', sans-serif;
+  text-rendering: optimizeLegibility;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  color: #fff;
+}

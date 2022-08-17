@@ -1,0 +1,146 @@
+.project {
+  width: calc(100% - 140px);
+  max-width: 1140px;
+  min-height: 498px;
+  margin-top: 100px;
+}
+
+.project__title {
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 27px;
+  margin: 0 auto 23px;
+}
+
+.project__info-section {
+  border-top: 1px solid #dadada;
+}
+
+.project__info {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: repeat(auto-fit, minmax(284px, 1fr));
+  grid-template-rows: 1fr;
+  gap: 22px 30px;
+  grid-auto-flow: row;
+  margin-bottom: 110px;
+}
+
+.project__info-title {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 24px;
+  margin: 70px auto 26px;
+}
+
+.project__info-text {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  margin: 0;
+}
+
+.project__line {
+  width: 100%;
+  min-height: 35px;
+  display: flex;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 17px;
+  text-align: center;
+  padding-top: 19px;
+}
+
+.project__line_backend {
+  box-sizing: border-box;
+  padding: 9px;
+  width: 228px;
+  background-color: #3ddc84;
+  color: #000;
+}
+
+.project__line_frontend {
+  box-sizing: border-box;
+  padding: 9px;
+  width: 912px;
+  background-color: #303030;
+}
+
+.project__caption {
+  display: flex;
+  flex-direction: row;
+  margin-top: 14px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+}
+
+.project__caption_backend {
+  width: 228px;
+  color: #8b8b8b;
+}
+
+.project__caption_frontend {
+  width: 912px;
+  color: #8b8b8b;
+}
+
+
+@media screen and (max-width: 1250px) {
+  .project {
+    width: calc(100% - 100px);
+    margin-top: 90px;
+  }
+
+  .project__info-text {
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .project__line_backend {
+    min-width: 140px;
+  }
+  
+  .project__caption_backend {
+    min-width: 140px;
+  }  
+}
+
+@media screen and (max-width: 698px) {
+  .project {
+    width: calc(100% - 28px);
+    box-sizing: border-box;
+    padding: 70px 0 93px;
+    margin: 0;
+  }
+  
+  .project__title {
+    font-size: 18px;
+    line-height: 22px;
+    margin: 0;
+  }
+
+  .project__info-title {
+    font-size: 18px;
+    line-height: 22px;
+    margin-top: 60px;
+  }
+  
+  .project__info-text {
+    font-size: 11px;
+    line-height: 16px;
+  }
+  
+  .project__info {
+    margin-bottom: 60px;
+  }
+
+  .project__line_backend {
+    min-width: 100px;
+  }
+
+  .project__caption_backend {
+    min-width: 100px;
+  }
+}
