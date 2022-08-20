@@ -26,7 +26,6 @@ function Form(props) {
               //         disabled={!props.isValid}
               type="submit"
               aria-label="сохранить изменения"
-              onClick={props.onClick}
             >
               {props.buttonText}
             </button>

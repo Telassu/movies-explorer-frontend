@@ -1,16 +1,23 @@
-import React, { createRef, useState } from "react";
+import React, { createRef, useContext, useEffect, useState } from "react";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 import Header from "../Header/Header";
 
 function Profile(props) {
   const nameInput = createRef();
   const emailInput = createRef();
+  const currentUser = useContext(CurrentUserContext)
 
 
-  const [name, setName] = useState("Виталий");
-  const [email, setEmail] = useState("pochta@yandex.ru");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const [isActive, setIsActive] = useState(false);
   //  const [isValid, setIsValid] = useState(false);
+
+  useEffect(() => {
+    setName(currentUser.name)
+    setEmail(currentUser.email)
+  }, [currentUser])
 
   const editProfile = () => {
     setIsActive(true);
@@ -33,9 +40,11 @@ function Profile(props) {
 
   return (
     <>
-      <Header />
+      <Header
+        isLoggedIn={props.isLoggedIn}
+      />
       <main className="profile">
-        <h1 className="profile__title">Привет, {props.name || 'Виталий'}!</h1>
+        <h1 className="profile__title">Привет, {name || ' '}!</h1>
         <form className="profile__form" name="profile" onSubmit={handleFormSubmit}>
           <div>
             <label className="profile__label">Имя
@@ -72,7 +81,13 @@ function Profile(props) {
           </div>
           <div className="profile__buttons">
             <button type="button" className={`profile__button ${isActive ? `profile__button_hidden` : ``}`} onClick={editProfile}>Редактировать</button>
-            <button type="button" className={`profile__button ${isActive ? `profile__button_hidden` : ``} profile__button_exit`}>Выйти из аккаунта</button>
+            <button
+              type="button"
+              className={`profile__button ${isActive ? `profile__button_hidden` : ``} profile__button_exit`}
+              onClick={props.OnSignOut}
+            >
+              Выйти из аккаунта
+            </button>
             <button
               type="submit"
               className={`profile__button ${!isActive ? `profile__button_hidden` : ``} profile__save-button`}

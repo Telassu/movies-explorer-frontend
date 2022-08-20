@@ -5,11 +5,12 @@ import Header from "../Header/Header";
 import MoviesCardlist from "../MoviesCardList/MoviesCardlis";
 import SearchForm from "../SearchForm/SearchForm";
 
-function Movies() {
-
+function Movies(props) {
   return (
     <>
-      <Header />
+      <Header
+        isLoggedIn={props.isLoggedIn}
+      />
       <main className="movies-page">
         <SearchForm />
         <MoviesCardlist />
