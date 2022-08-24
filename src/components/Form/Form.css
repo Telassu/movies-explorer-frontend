@@ -34,10 +34,12 @@
 
 
 .input-error {
+  max-width: 100%;
   font-weight: 400;
   font-size: 10px;
   line-height: 12px;
   color: #ee3465;
+  margin: 0;
 }
 
 .input {
@@ -49,7 +51,7 @@
   font-weight: 400;
   font-size: 13px;
   line-height: 16px;
-  margin: 10px 0;
+  margin: 5px 0;
   box-sizing: border-box;
   padding-left: 15px;
 }
@@ -119,7 +121,7 @@
   font-weight: 400;
   font-size: 10px;
   line-height: 12px;
-  margin: 12px;
+  margin: 0;
 }
 
 @media screen and (max-width: 500px) {

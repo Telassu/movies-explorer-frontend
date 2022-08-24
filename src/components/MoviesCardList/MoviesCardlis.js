@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 
 import MoviesCard from "../MoviesCard/MoviesCard";
@@ -5,7 +6,6 @@ import useWindowSize from "../../utils/WindowSize";
 
 function MoviesCardlist({ movies, onCardSaved, onCardDelete, pageSavedMovies, savedMovies }) {
   const size = useWindowSize();
-
   const [addCardsRow, setAddCardsRow] = useState({ total: 12, plus: 3 });
   const [isButtonHidden, setIsButtonHidden] = useState(false);
 
@@ -21,7 +21,6 @@ function MoviesCardlist({ movies, onCardSaved, onCardDelete, pageSavedMovies, sa
 
   useEffect(() => {
     checkWindow();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [size.width])
 
   useEffect(() => {
@@ -30,8 +29,7 @@ function MoviesCardlist({ movies, onCardSaved, onCardDelete, pageSavedMovies, sa
     } else if (addCardsRow.total > movies.length) {
       setIsButtonHidden(false)
     }
-  }, [addCardsRow.total, movies, setIsButtonHidden]);
-
+  }, [addCardsRow.total]);
 
   const addMoreCards = () => {
     setAddCardsRow({

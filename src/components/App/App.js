@@ -10,7 +10,7 @@ import Register from "../Register/Register";
 import SavedMovies from "../SavedMovies/SavedMovies";
 
 import CurrentUserContext from "../../contexts/CurrentUserContext";
-// import ProtectedRoute from "../ProtectedRoute/ProtectedRoute"; // защита роутов
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute"; // защита роутов
 import * as auth from "../../utils/Auth";
 import { api } from "../../utils/MainApi";
 import { moviesApi } from "../../utils/MoviesApi";
@@ -155,42 +155,42 @@ function App() {
               isLoggedIn={isLoggedIn}
             />
           </Route>
-          <Route path="/movies">
-            <Movies
-              isLoggedIn={isLoggedIn}
-              isLoading={isLoading}
-              isError={isError}
-              isNotMovies={isNotMovies}
-              setIsLoading={setIsLoading}
-              movies={allMovies}
-              shownMovies={shownMovies}
-              setMovies={setShownMovies}
-              onCardSaved={handleMovieSave}
-              onCardDelete={handleMovieDelete}
-              setIsNotMovies={setIsNotMovies}
-              savedMovies={savedMovies}
-            />
-          </Route>
-          <Route path="/saved-movies">
-            <SavedMovies
-              isLoggedIn={isLoggedIn}
-              isNotMovies={isNotMovies}
-              isLoading={isLoading}
-              isError={isError}
-              movies={savedMovies}
-              setMovies={setSavedMovies}
-              setIsLoading={setIsLoading}
-              onCardDelete={handleMovieDelete}
-              setIsNotMovies={setIsNotMovies}
-            />
-          </Route>
-          <Route path="/profile">
-            <Profile
-              isLoggedIn={isLoggedIn}
-              OnSignOut={handleSignOut}
-              onUpdateUser={handleOnUpdateUser}
-            />
-          </Route>
+          <ProtectedRoute
+            path="/movies"
+            isLoggedIn={isLoggedIn}
+            component={Movies}
+            isLoading={isLoading}
+            isError={isError}
+            isNotMovies={isNotMovies}
+            setIsLoading={setIsLoading}
+            movies={allMovies}
+            shownMovies={shownMovies}
+            setMovies={setShownMovies}
+            onCardSaved={handleMovieSave}
+            onCardDelete={handleMovieDelete}
+            setIsNotMovies={setIsNotMovies}
+            savedMovies={savedMovies}
+          />
+          <ProtectedRoute
+            path="/saved-movies"
+            component={SavedMovies}
+            isLoggedIn={isLoggedIn}
+            isNotMovies={isNotMovies}
+            isLoading={isLoading}
+            isError={isError}
+            movies={savedMovies}
+            setMovies={setSavedMovies}
+            setIsLoading={setIsLoading}
+            onCardDelete={handleMovieDelete}
+            setIsNotMovies={setIsNotMovies}
+          />
+          <ProtectedRoute
+            path="/profile"
+            component={Profile}
+            isLoggedIn={isLoggedIn}
+            OnSignOut={handleSignOut}
+            onUpdateUser={handleOnUpdateUser}
+          />
           <Route path="/signin">
             <Login onLogin={hadleLogin} />
           </Route>
@@ -202,7 +202,7 @@ function App() {
           </Route>
         </Switch>
       </div>
-    </CurrentUserContext.Provider>
+    </CurrentUserContext.Provider >
   )
 };
 

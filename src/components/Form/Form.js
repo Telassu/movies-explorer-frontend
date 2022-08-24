@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import Logo from "../../images/logo.svg";
 
 function Form(props) {
-
   return (
     <>
       <div className="form-container">
@@ -16,14 +15,14 @@ function Form(props) {
           className={`form form_${props.name}`}
           name={props.name}
           onSubmit={props.onSubmit}
+          noValidate
         ><div>
             {props.children}
-            <span className={`input-error ${props.name}-input-error`}></span>
           </div>
           <div className="form__buttons">
             <button
               className={`form__save-button form__save-button_${props.name}`}
-              //         disabled={!props.isValid}
+              disabled={!props.isValid}
               type="submit"
               aria-label="сохранить изменения"
             >
@@ -34,7 +33,7 @@ function Form(props) {
             </p>
           </div>
         </form>
-      </div>
+      </div >
     </>
   );
 };

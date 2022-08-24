@@ -1,20 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 
 import Form from "../Form/Form";
-
+import useFormWithValidation from "../../utils/Validation"
 
 function Login(props) {
-  const [values, setValues] = useState({
-    email: "",
-    password: "",
-  });
-
-  const handleChange = (evt) => {
-    const value = evt.target.value;
-    const name = evt.target.name;
-
-    setValues({ ...values, [name]: value })
-  }
+  const { values, errors, isValid, handleChange } = useFormWithValidation();
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -30,29 +20,36 @@ function Login(props) {
       link="/signup"
       linkText="Регистрация"
       onSubmit={handleSubmit}
+      isValid={isValid}
     >
-      <span className="input-caption login__input-caption">Email</span>
-      <input
-        type="email"
-        name="email"
-        id="email"
-        className="input login__input login__input_type_email"
-        placeholder="E-mail"
-        required
-        value={values.email || ""}
-        onChange={handleChange}
-      />
-      <span className="input-caption login__input-caption">Пароль</span>
-      <input
-        type="password"
-        name="password"
-        id="password"
-        className="input login__input login__input_type_password"
-        placeholder="Пароль"
-        required
-        value={values.password || ""}
-        onChange={handleChange}
-      />
+      <div>
+        <label className="input-caption login__input-caption">Email</label>
+        <input
+          type="email"
+          name="email"
+          id="email"
+          className="input login__input login__input_type_email"
+          placeholder="E-mail"
+          required
+          value={values.email || ""}
+          onChange={handleChange}
+        />
+        <span className="input-error login__input-error name-input-error">{errors.email}</span>
+      </div>
+      <div>
+        <label className="input-caption login__input-caption">Пароль</label>
+        <input
+          type="password"
+          name="password"
+          id="password"
+          className="input login__input login__input_type_password"
+          placeholder="Пароль"
+          required
+          value={values.password || ""}
+          onChange={handleChange}
+        />
+        <span className="input-error login__input-error name-input-error">{errors.password}</span>
+      </div>
     </Form>
   );
 };

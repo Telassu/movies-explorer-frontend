@@ -1,44 +1,35 @@
 import React, { createRef, useContext, useEffect, useState } from "react";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 
+import useFormWithValidation from "../../utils/Validation";
 import Header from "../Header/Header";
 
 function Profile(props) {
   const nameInput = createRef();
   const emailInput = createRef();
   const currentUser = useContext(CurrentUserContext)
+  const { values, setValues, errors, isValid, handleChange } = useFormWithValidation();
 
-
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
   const [isActive, setIsActive] = useState(false);
   const [inputActive, setInputValid] = useState(false)
-  //  const [isValid, setIsValid] = useState(false);
 
+  //  console.log(currentUser)
   useEffect(() => {
-    setName(currentUser.name)
-    setEmail(currentUser.email)
+    setValues({ name: currentUser.name, email: currentUser.email })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentUser])
 
-  const editProfile = () => {
+  function editProfile() {
     setIsActive(true);
-    setInputValid(true)
-  }
-
-  const handleChangeName = (evt) => {
-    setName(evt.target.value);
-  }
-
-  const handleChangeEmail = (evt) => {
-    setEmail(evt.target.value);
+    setInputValid(true);
   }
 
   const handleFormSubmit = (evt) => {
     evt.preventDefault();
 
     props.onUpdateUser({
-      name,
-      email,
+      name: values.name,
+      email: values.email
     });
   }
 
@@ -68,10 +59,11 @@ function Profile(props) {
                 maxLength="30"
                 required
                 disabled={!inputActive}
-                onChange={handleChangeName}
-                value={name || ''}
+                onChange={handleChange}
+                value={values.name || ''}
               />
             </label>
+            <span className="profile__input-error">{errors.name}</span>
             <label className="profile__label">E-mail
               <input
                 type="email"
@@ -82,11 +74,11 @@ function Profile(props) {
                 placeholder="E-mail"
                 required
                 disabled={!inputActive}
-                onChange={handleChangeEmail}
-                value={email || ''}
+                onChange={handleChange}
+                value={values.email || ''}
               />
             </label>
-            <span className="profile__input-error"></span>
+            <span className="profile__input-error">{errors.email}</span>
           </div>
           <div className="profile__buttons">
             <button type="button" className={`profile__button ${isActive ? `profile__button_hidden` : ``}`} onClick={editProfile}>Редактировать</button>
@@ -100,7 +92,7 @@ function Profile(props) {
             <button
               type="submit"
               className={`profile__button ${!isActive ? `profile__button_hidden` : ``} profile__save-button`}
-              //              disabled={!isValid}
+              disabled={!isValid}
               onClick={handleToggle}
             >Сохранить</button>
           </div>

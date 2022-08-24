@@ -31,28 +31,29 @@ function Navigation(props) {
             </ul>
           )
           : (
-            <ul className="navigation__links navigation__links_login">
-              <li className="navigation__button">
-                <Link to="/movies" className="navigation__link">
-                  Фильмы
-                </Link>
-                <Link to="/saved-movies" className="navigation__link">
-                  Сохранённые фильмы
-                </Link>
-              </li>
-              <li className="navigation__button navigation__button_account">
-                <Link to="/profile" className="navigation__link">Аккаунт</Link>
-              </li>
-            </ul>
+            <>
+              <ul className="navigation__links navigation__links_login">
+                <li className="navigation__button">
+                  <Link to="/movies" className="navigation__link">
+                    Фильмы
+                  </Link>
+                  <Link to="/saved-movies" className="navigation__link">
+                    Сохранённые фильмы
+                  </Link>
+                </li>
+                <li className="navigation__button navigation__button_account">
+                  <Link to="/profile" className="navigation__link">Аккаунт</Link>
+                </li>
+              </ul>
+              <button
+                type="button"
+                className="button-burger"
+                aria-label="открыть навигацию"
+                onClick={handleOpenMenu}>
+              </button>
+            </>
           )
         }
-        <button
-          type="button"
-          className="button-burger"
-          aria-label="открыть навигацию"
-          onClick={handleOpenMenu}>
-        </button>
-
       </section>
       <section className={`navigation__burger ${isOpenMenu ? `navigation__burger_opened` : ` `}`}>
         <button

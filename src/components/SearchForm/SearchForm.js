@@ -16,16 +16,12 @@ function SearchForm({ setIsLoading, movies, setMovies, setIsNotMovies, shownMovi
     setIsError(evt.target.validationMessage)
   }
 
-  // действия по кнопке поиска: текст запроса, найденные фильмы, 
-  // состояние переключателя короткометражок - в хранилище, результат - на экран
-
   const localSaveSearching = (title) => {
     localStorage.setItem("lastMoviesRequest", JSON.stringify(title));
     localStorage.setItem("searchMovies", JSON.stringify(searchedMovies));
     //    localStorage.setItem("shortMovies", JSON.stringify(isShortMovies));
   }
 
-  //сабмит
   const handleFormSubmit = (evt) => {
     evt.preventDefault();
 
