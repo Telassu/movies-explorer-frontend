@@ -3,23 +3,44 @@ import { useState } from "react";
 
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 
-import { filterMovies } from "../../utils/FilterMovies";
+import { filterDuration, filterMovies } from "../../utils/FilterMovies";
 
-function SearchForm({ setIsLoading, movies, setMovies, setIsNotMovies, shownMovies }) {
+function SearchForm({ setIsLoading, movies, setMovies, setIsNotMovies }) {
   const [isSearch, setIsSearch] = useState('');
   const [isError, setIsError] = useState(false);
+  const [checked, setChecked] = useState(true)
 
-  const searchedMovies = filterMovies(movies, isSearch);
 
   const handleChange = (evt) => {
     setIsSearch(evt.target.value);
     setIsError(evt.target.validationMessage)
   }
 
-  const localSaveSearching = (title) => {
+  const searchMovies = (title) => {
+    const searchedMovies = filterMovies(movies, isSearch);
+    const shortMovies = filterDuration(searchedMovies)
+
+    if (!checked) {
+      if (searchedMovies.length > 0) {
+        setIsNotMovies(false)
+        setMovies(searchedMovies);
+        console.log(searchedMovies)
+      } else {
+        setIsNotMovies(true)
+      }
+    }
+    else {
+      if (shortMovies.length > 0) {
+        setIsNotMovies(false)
+        setMovies(shortMovies);
+      } else {
+        setIsNotMovies(true)
+      }
+    }
+
     localStorage.setItem("lastMoviesRequest", JSON.stringify(title));
     localStorage.setItem("searchMovies", JSON.stringify(searchedMovies));
-    //    localStorage.setItem("shortMovies", JSON.stringify(isShortMovies));
+    localStorage.setItem("shortMovies", JSON.stringify(shortMovies));
   }
 
   const handleFormSubmit = (evt) => {
@@ -29,13 +50,7 @@ function SearchForm({ setIsLoading, movies, setMovies, setIsNotMovies, shownMovi
       setIsError(true)
     } else {
       setIsLoading(true);
-      localSaveSearching(isSearch);
-      if (searchedMovies.length > 0) {
-        setIsNotMovies(false)
-        setMovies(searchedMovies);
-      } else {
-        setIsNotMovies(true)
-      }
+      searchMovies(isSearch);
       setIsLoading(false)
     }
   }
@@ -54,7 +69,7 @@ function SearchForm({ setIsLoading, movies, setMovies, setIsNotMovies, shownMovi
             type="text"
             required
             onChange={handleChange}
-            value={isSearch || ''}
+            value={isSearch || ""}
           />
           <span
             className="search__input-error"
@@ -71,7 +86,8 @@ function SearchForm({ setIsLoading, movies, setMovies, setIsNotMovies, shownMovi
       <FilterCheckbox
         setMovies={setMovies}
         movies={movies}
-        shownMovies={shownMovies}
+        checked={checked}
+        setChecked={setChecked}
       />
     </section>
   )

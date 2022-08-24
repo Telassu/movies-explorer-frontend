@@ -8,7 +8,7 @@ function Profile(props) {
   const nameInput = createRef();
   const emailInput = createRef();
   const currentUser = useContext(CurrentUserContext)
-  const { values, setValues, errors, isValid, handleChange } = useFormWithValidation();
+  const { values, setValues, errors, isValid, handleChange, resetForm } = useFormWithValidation();
 
   const [isActive, setIsActive] = useState(false);
   const [inputActive, setInputValid] = useState(false)
@@ -31,6 +31,8 @@ function Profile(props) {
       name: values.name,
       email: values.email
     });
+
+    resetForm();
   }
 
   const handleToggle = () => {
@@ -78,8 +80,9 @@ function Profile(props) {
                 value={values.email || ''}
               />
             </label>
-            <span className="profile__input-error">{errors.email}</span>
+            <span className="profile__input-error"> {errors.email}</span>
           </div>
+          <span className="error-message" hidden={!isActive}>{props.isErrorMessage}</span>
           <div className="profile__buttons">
             <button type="button" className={`profile__button ${isActive ? `profile__button_hidden` : ``}`} onClick={editProfile}>Редактировать</button>
             <button

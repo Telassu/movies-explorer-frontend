@@ -29,11 +29,13 @@ function MoviesCard({ movie, onCardSaved, onCardDelete, pageSavedMovies, savedMo
         onMouseOver={showButton}
         onMouseOut={hideButton}
       >
-        <img
-          className="movie__image"
-          src={movie.image.url ? `${baseURL}/${movie.image.url}` : movie.image}
-          alt={movie.nameRU}
-        />
+        <a href={movie.trailerLink} target="_blank" rel="noreferrer">
+          <img
+            className="movie__image"
+            src={movie.image.url ? `${baseURL}/${movie.image.url}` : movie.image}
+            alt={movie.nameRU}
+          />
+        </a>
         <div className="movie__subtitle">
           <p className="movie__name">{movie.nameRU}</p>
           <div className="movie__time-container">{getTime(movie.duration)}</div>
@@ -48,7 +50,6 @@ function MoviesCard({ movie, onCardSaved, onCardDelete, pageSavedMovies, savedMo
             savedMovies={savedMovies}
           />
         </div>
-
       </li>
     </>
   );

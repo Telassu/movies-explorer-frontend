@@ -8,6 +8,7 @@ import Preloader from "../Preloader/Preloader";
 
 function SavedMovies(props) {
   const pageSavedMovies = true;
+  console.log(props.movies)
 
   return (
     <>

@@ -7,7 +7,6 @@ import SearchForm from "../SearchForm/SearchForm";
 import Preloader from "../Preloader/Preloader";
 
 function Movies(props) {
-
   return (
     <>
       <Header
@@ -22,7 +21,7 @@ function Movies(props) {
           setMovies={props.setMovies}
           setIsNotMovies={props.setIsNotMovies}
         />
-        {props.isError}
+
         {props.isLoading
           ? <Preloader /> : ''}
         {props.isNotMovies

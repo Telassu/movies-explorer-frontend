@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import Logo from "../../images/logo.svg";
 
 function Form(props) {
+
   return (
     <>
       <div className="form-container">
@@ -20,6 +21,7 @@ function Form(props) {
             {props.children}
           </div>
           <div className="form__buttons">
+            <span className="error-message">{props.isErrorMessage}</span>
             <button
               className={`form__save-button form__save-button_${props.name}`}
               disabled={!props.isValid}

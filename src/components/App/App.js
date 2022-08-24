@@ -10,7 +10,7 @@ import Register from "../Register/Register";
 import SavedMovies from "../SavedMovies/SavedMovies";
 
 import CurrentUserContext from "../../contexts/CurrentUserContext";
-import ProtectedRoute from "../ProtectedRoute/ProtectedRoute"; // защита роутов
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import * as auth from "../../utils/Auth";
 import { api } from "../../utils/MainApi";
 import { moviesApi } from "../../utils/MoviesApi";
@@ -22,11 +22,16 @@ function App() {
 
   const [shownMovies, setShownMovies] = useState([]);
   const [savedMovies, setSavedMovies] = useState([]);
-  const [isError, setIsError] = useState('');
   const [isNotMovies, setIsNotMovies] = useState(false);
+
+  const [isErrorMessage, setIsErrorMessage] = useState('');
   const allMovies = JSON.parse(localStorage.getItem('allMovies'));
 
   const history = useHistory();
+
+  //  console.log(localStorage)
+  //  console.log(isLoggedIn)
+
 
   //получение информации о пользователе
   useEffect(() => {
@@ -47,6 +52,7 @@ function App() {
       .checkToken()
       .then((res) => {
         if (res) {
+          localStorage.setItem('IsLoggedIn', true)
           setIsLoggedIn(true);
         }
       })
@@ -58,16 +64,17 @@ function App() {
     auth
       .register(name, email, password)
       .then(() => {
+        auth.login(email, password)
         setIsLoggedIn(true)
         history.push("/movies")
       })
       .catch((err) => {
-        console.log('ERROR =>', err)
+        setIsErrorMessage('При регистрации пользователя произошла ошибка.')
       })
   }
 
   //авторизация
-  const hadleLogin = (email, password) => {
+  function hadleLogin(email, password) {
     auth
       .login(email, password)
       .then((res) => {
@@ -75,20 +82,7 @@ function App() {
         setIsLoggedIn(true)
       })
       .catch((err) => {
-        console.log('ERROR =>', err)
-      })
-  }
-
-  //выход из системы
-  const handleSignOut = () => {
-    auth
-      .logout()
-      .then((res) => {
-        setIsLoggedIn(false);
-        history.push("/");
-      })
-      .catch((err) => {
-        console.log('ERROR =>', err)
+        setIsErrorMessage('Вы ввели неправильный логин или пароль.')
       })
   }
 
@@ -100,9 +94,12 @@ function App() {
       .editUserInfo(user.name, user.email)
       .then((user) => {
         setCurrentUser(user);
+        setIsErrorMessage("Данные успешно обновлены")
       })
+
       .catch((err) => {
         console.log("ERROR! =>", err);
+        setIsErrorMessage(err)
       })
       .finally(() => setIsLoading(false));
   }
@@ -113,15 +110,14 @@ function App() {
     moviesApi
       .getAllMovies()
       .then((movies) => {
-        setShownMovies(movies)
         localStorage.setItem('allMovies', JSON.stringify(movies))
       })
       .catch((err) => {
         console.log("ERROR! =>", err);
-        setIsError('Во время запроса проишла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте еще раз');
+        setIsErrorMessage('Во время запроса проишла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте еще раз');
       })
       .finally(() => setIsLoading(false));
-  }, []);
+  }, [history]);
 
   // сохранение фильма в своем списке
   const handleMovieSave = (movie) => {
@@ -146,21 +142,30 @@ function App() {
       .finally(() => setIsLoading(false));
   }
 
+  //выход из системы
+  const handleSignOut = () => {
+    auth
+      .logout()
+      .then((res) => {
+        setIsLoggedIn(false);
+        localStorage.clear();
+        history.push("/");
+      })
+      .catch((err) => {
+        console.log('ERROR =>', err)
+      })
+  }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
         <Switch>
-          <Route exact path="/">
-            <Main
-              isLoggedIn={isLoggedIn}
-            />
-          </Route>
           <ProtectedRoute
             path="/movies"
             isLoggedIn={isLoggedIn}
             component={Movies}
             isLoading={isLoading}
-            isError={isError}
+            isErrorMessage={isErrorMessage}
             isNotMovies={isNotMovies}
             setIsLoading={setIsLoading}
             movies={allMovies}
@@ -177,7 +182,7 @@ function App() {
             isLoggedIn={isLoggedIn}
             isNotMovies={isNotMovies}
             isLoading={isLoading}
-            isError={isError}
+            isErrorMessage={isErrorMessage}
             movies={savedMovies}
             setMovies={setSavedMovies}
             setIsLoading={setIsLoading}
@@ -188,15 +193,31 @@ function App() {
             path="/profile"
             component={Profile}
             isLoggedIn={isLoggedIn}
+            isErrorMessage={isErrorMessage}
+            setIsErrorMessage={setIsErrorMessage}
             OnSignOut={handleSignOut}
             onUpdateUser={handleOnUpdateUser}
           />
+
+          <Route exact path="/">
+            <Main
+              isLoggedIn={isLoggedIn}
+            />
+          </Route>
+
           <Route path="/signin">
-            <Login onLogin={hadleLogin} />
+            <Login
+              onLogin={hadleLogin}
+              isErrorMessage={isErrorMessage}
+            />
           </Route>
           <Route path="/signup">
-            <Register onRegister={handleRegister} />
+            <Register
+              onRegister={handleRegister}
+              isErrorMessage={isErrorMessage}
+            />
           </Route>
+
           <Route exact path="*">
             <PageNotFound />
           </Route>

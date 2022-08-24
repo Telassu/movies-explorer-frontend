@@ -65,7 +65,9 @@
 }
 
 .form__buttons {
-  margin-bottom: 70px;
+  margin: 70px auto;
+  display: flex;
+  flex-direction: column;
 }
 
 .form__save-button {
@@ -79,7 +81,6 @@
   font-size: 14px;
   line-height: 17px;
   text-align: center;
-  margin-top: 69px;
 }
 
 .form__save-button:hover {

@@ -21,6 +21,7 @@ function Register(props) {
       linkText="Войти"
       onSubmit={handleSubmit}
       isValid={isValid}
+      isErrorMessage={props.isErrorMessage}
     >
       <div>
         <label className="input-caption auth__input-caption">Имя</label>

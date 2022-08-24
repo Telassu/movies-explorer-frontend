@@ -10,5 +10,4 @@ const filterMovies = (arr, query) =>
   );
 
 
-
 export { filterDuration, filterMovies }

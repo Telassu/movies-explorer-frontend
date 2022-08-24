@@ -21,6 +21,7 @@ function Login(props) {
       linkText="Регистрация"
       onSubmit={handleSubmit}
       isValid={isValid}
+      isErrorMessage={props.isErrorMessage}
     >
       <div>
         <label className="input-caption login__input-caption">Email</label>
