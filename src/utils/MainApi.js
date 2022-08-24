@@ -12,15 +12,6 @@ class Api {
     }
   }
 
-  /*  getInitialCards() {
-      return fetch (`${this._url}/cards`, {
-        headers: this._headers,
-        credentials: 'include',
-      },
-    )
-      .then (this._checkRes)
-    };
-  */
   getUserInfo() {
     return fetch(`${this._url}/users/me`, {
       headers: this._headers,
@@ -30,15 +21,57 @@ class Api {
       .then(this._checkRes)
   };
 
-  editUserInfo(dataName, dataAbout) {
+  editUserInfo(userName, userEmail) {
     return fetch(`${this._url}/users/me`, {
       method: 'PATCH',
       headers: this._headers,
       credentials: 'include',
       body: JSON.stringify({
-        name: dataName,
-        about: dataAbout
+        name: userName,
+        email: userEmail
       })
+    })
+
+      .then(this._checkRes)
+  }
+
+  getInitialMovies() {
+    return fetch(`${this._url}/movies`, {
+      headers: this._headers,
+      credentials: 'include',
+    },
+    )
+      .then(this._checkRes)
+  };
+
+  saveNewMovie(movie) {
+    return fetch(`${this._url}/movies`, {
+      method: 'POST',
+      headers: this._headers,
+      credentials: 'include',
+      body: JSON.stringify({
+        country: movie.country ? movie.country : "Страна не указана",
+        director: movie.director ? movie.director : "Режиссер не указан",
+        duration: movie.duration,
+        year: movie.year ? movie.year : "Год не указан",
+        description: movie.description ? movie.description : "Описание не указано",
+        image: `https://api.nomoreparties.co/${movie.image.url}`,
+        trailerLink: movie.trailerLink,
+        nameRU: movie.nameRU ? movie.nameRU : "Название не указано",
+        nameEN: movie.nameEN ? movie.nameEN : "Назввание не указано",
+        thumbnail: `https://api.nomoreparties.co/${movie.image.formats.thumbnail.url}`,
+        movieId: movie.id,
+        owner: movie.owner
+      })
+    })
+      .then(this._checkRes)
+  }
+
+  deleteMovie(id) {
+    return fetch(`${this._url}/movies/${id}`, {
+      method: 'DELETE',
+      headers: this._headers,
+      credentials: 'include',
     })
 
       .then(this._checkRes)
@@ -56,42 +89,18 @@ class Api {
   
       .then (this._checkRes)
     }
-  
-    editNewCard (dataPlace, dataLink) {
-      return fetch(`${this._url}/cards`, {
-        method: 'POST',
-        headers: this._headers,
-        credentials: 'include',
-        body: JSON.stringify({
-          name: dataPlace,
-          link: dataLink
-        })
+    */
+  /*
+      changeLikeCardStatus (id, isLiked) {
+        return fetch (`${this._url}/cards/${id}/likes`, {
+          method: `${isLiked ? 'DELETE' : 'PUT'}`,
+          headers: this._headers,
+          credentials: 'include',
       })
-  
+    
       .then (this._checkRes)
     }
-  
-    changeLikeCardStatus (id, isLiked) {
-      return fetch (`${this._url}/cards/${id}/likes`, {
-        method: `${isLiked ? 'DELETE' : 'PUT'}`,
-        headers: this._headers,
-        credentials: 'include',
-    })
-  
-    .then (this._checkRes)
-  }
-  
-  
-    deleteCard (id) {
-      return fetch(`${this._url}/cards/${id}`, {
-        method: 'DELETE',
-        headers: this._headers,
-        credentials: 'include',
-    })
-  
-    .then (this._checkRes)
-    }
-  */
+    */
 }
 
 export const api = new Api({

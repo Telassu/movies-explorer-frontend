@@ -12,6 +12,7 @@ function Profile(props) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [isActive, setIsActive] = useState(false);
+  const [inputActive, setInputValid] = useState(false)
   //  const [isValid, setIsValid] = useState(false);
 
   useEffect(() => {
@@ -21,8 +22,7 @@ function Profile(props) {
 
   const editProfile = () => {
     setIsActive(true);
-    nameInput.current.removeAttribute('disabled');
-    emailInput.current.removeAttribute('disabled');
+    setInputValid(true)
   }
 
   const handleChangeName = (evt) => {
@@ -35,7 +35,16 @@ function Profile(props) {
 
   const handleFormSubmit = (evt) => {
     evt.preventDefault();
+
+    props.onUpdateUser({
+      name,
+      email,
+    });
+  }
+
+  const handleToggle = () => {
     setIsActive(false);
+    setInputValid(false);
   }
 
   return (
@@ -44,7 +53,7 @@ function Profile(props) {
         isLoggedIn={props.isLoggedIn}
       />
       <main className="profile">
-        <h1 className="profile__title">Привет, {name || ' '}!</h1>
+        <h1 className="profile__title">Привет, {currentUser.name}!</h1>
         <form className="profile__form" name="profile" onSubmit={handleFormSubmit}>
           <div>
             <label className="profile__label">Имя
@@ -58,9 +67,9 @@ function Profile(props) {
                 minLength="2"
                 maxLength="30"
                 required
-                disabled
+                disabled={!inputActive}
                 onChange={handleChangeName}
-                value={name || ' '}
+                value={name || ''}
               />
             </label>
             <label className="profile__label">E-mail
@@ -72,9 +81,9 @@ function Profile(props) {
                 className="profile__input profile__input_type_email"
                 placeholder="E-mail"
                 required
-                disabled
+                disabled={!inputActive}
                 onChange={handleChangeEmail}
-                value={email || ' '}
+                value={email || ''}
               />
             </label>
             <span className="profile__input-error"></span>
@@ -91,7 +100,8 @@ function Profile(props) {
             <button
               type="submit"
               className={`profile__button ${!isActive ? `profile__button_hidden` : ``} profile__save-button`}
-            //              disabled={!isValid}
+              //              disabled={!isValid}
+              onClick={handleToggle}
             >Сохранить</button>
           </div>
         </form>

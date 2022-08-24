@@ -1,37 +1,55 @@
-import React, { useState } from "react";
+import React from "react";
+import { useEffect } from "react";
+import { useState } from "react";
 import { Route, Switch } from "react-router-dom";
 
 import Delete from "../../images/delete.svg"
 import Saved from "../../images/saved.svg";
 
 
-function CardButton(props) {
-  const [isSavedMovie, setIsSavedMovie] = useState(false);
+function CardButton({ onCardSaved, movie, onCardDelete, isSaved, pageSavedMovies, savedMovies }) {
+  const [isSaveMovieIcon, setIsSaveMovieIcon] = useState(false);
 
-  const saveMovie = () => {
-    setIsSavedMovie(true);
+  const currentMovie = movie.id && savedMovies.filter(el => el.movieId === movie.id)
+
+  useEffect(() => {
+    if (isSaved) {
+      setIsSaveMovieIcon(true)
+    } else {
+      setIsSaveMovieIcon(false)
+    }
+  }, [isSaved])
+
+  const handleMovieDelete = () => {
+    if (pageSavedMovies) {
+      onCardDelete(movie._id)
+    } else {
+      onCardDelete(currentMovie[0]._id)
+    }
+    setIsSaveMovieIcon(false)
   }
 
-  const cancelSaveMovie = () => {
-    setIsSavedMovie(false)
+  const handleMovieSave = () => {
+    onCardSaved(movie)
+    setIsSaveMovieIcon(true)
   }
 
   return (
     <>
       <Switch>
         <Route path="/movies">
-          {isSavedMovie
+          {isSaveMovieIcon
             ? <img
               className="movie__saved"
               src={Saved}
-              alt="сохранено успешно"
-              onClick={cancelSaveMovie}
+              alt="сохраненный фильм"
+              onClick={handleMovieDelete}
             />
             : <button
               type="button"
               className="movie__save-button"
               aria-label="сохранить"
-              onClick={saveMovie}
+              onClick={handleMovieSave}
             >
               Сохранить
             </button>
@@ -43,6 +61,7 @@ function CardButton(props) {
             className="movie__delete-button"
             src={Delete}
             alt="удалить фильм"
+            onClick={handleMovieDelete}
           />
         </Route>
       </Switch>

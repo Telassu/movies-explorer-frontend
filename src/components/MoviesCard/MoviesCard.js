@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 
-import Example from "../../images/example_movie.png";
 import CardButton from "../CardButton/CardButton";
 
-function MoviesCard() {
+function MoviesCard({ movie, onCardSaved, onCardDelete, pageSavedMovies, savedMovies }) {
+  const baseURL = 'https://api.nomoreparties.co';
+
   const [isButton, setIsButton] = useState(true);
+
+  const isSaved = movie.id && savedMovies.some(el => el.movieId === movie.id)
 
   const showButton = () => {
     setIsButton(false)
@@ -12,6 +15,12 @@ function MoviesCard() {
 
   const hideButton = () => {
     setIsButton(true)
+  }
+
+  function getTime(duration) {
+    const hours = Math.trunc(duration / 60);
+    const min = duration % 60;
+    return hours + 'ч ' + min + 'м';
   }
 
   return (
@@ -22,14 +31,22 @@ function MoviesCard() {
       >
         <img
           className="movie__image"
-          src={Example} alt="film"
+          src={movie.image.url ? `${baseURL}/${movie.image.url}` : movie.image}
+          alt={movie.nameRU}
         />
         <div className="movie__subtitle">
-          <p className="movie__name">33 слова о дизайне</p>
-          <div className="movie__time-container">1ч 17м</div>
+          <p className="movie__name">{movie.nameRU}</p>
+          <div className="movie__time-container">{getTime(movie.duration)}</div>
         </div>
         <div className={`${isButton ? `movie__button_hidden` : ` `}`}>
-          <CardButton />
+          <CardButton
+            movie={movie}
+            onCardSaved={onCardSaved}
+            onCardDelete={onCardDelete}
+            isSaved={isSaved}
+            pageSavedMovies={pageSavedMovies}
+            savedMovies={savedMovies}
+          />
         </div>
 
       </li>

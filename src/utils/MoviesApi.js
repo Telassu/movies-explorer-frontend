@@ -12,10 +12,9 @@ class Api {
         }
     }
 
-    getInitialMovies() {
+    getAllMovies() {
         return fetch(`${this._url}/beatfilm-movies`, {
             headers: this._headers,
-            credentials: 'include',
         },
         )
             .then(this._checkRes)
