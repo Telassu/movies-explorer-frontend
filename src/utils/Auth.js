@@ -1,4 +1,4 @@
-const URL = 'http://localhost:3001';
+const URL = `${window.location.protocol}${process.env.REACT_APP_API_URL}`;
 
 function checkRes(res) {
     if (res.ok) {
