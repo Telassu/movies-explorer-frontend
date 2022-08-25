@@ -22,7 +22,6 @@ function SavedMovies(props) {
           setIsLoading={props.setIsLoading}
           setIsNotMovies={props.setIsNotMovies}
         />
-        {props.isError}
         {props.isLoading
           ? <Preloader /> : ''}
         {props.isNotMovies

@@ -1,4 +1,5 @@
-import React from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect } from "react";
 
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
@@ -7,6 +8,31 @@ import SearchForm from "../SearchForm/SearchForm";
 import Preloader from "../Preloader/Preloader";
 
 function Movies(props) {
+  console.log(localStorage)
+
+  // результаты последнего поиска
+  useEffect(() => {
+    const lastSearchedMovie = JSON.parse(localStorage.getItem("searchMovies"));
+    const lastShortMovie = JSON.parse(localStorage.getItem("shortMovies"));
+    const lastCheckboxState = localStorage.getItem('Checkbox')
+
+    if (lastCheckboxState === true) {
+      if (lastShortMovie.length > 0) {
+        props.setMovies(lastShortMovie)
+      }
+      else {
+        props.setIsNotMovies(true)
+      }
+    } else {
+      if (lastSearchedMovie.length > 0) {
+        props.setMovies(lastSearchedMovie)
+      }
+      else {
+        props.setIsNotMovies(true)
+      }
+    }
+  }, [])
+
   return (
     <>
       <Header

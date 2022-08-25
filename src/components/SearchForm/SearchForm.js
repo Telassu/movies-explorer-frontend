@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
@@ -8,8 +8,15 @@ import { filterDuration, filterMovies } from "../../utils/FilterMovies";
 function SearchForm({ setIsLoading, movies, setMovies, setIsNotMovies }) {
   const [isSearch, setIsSearch] = useState('');
   const [isError, setIsError] = useState(false);
-  const [checked, setChecked] = useState(true)
+  const [checked, setChecked] = useState(true);
 
+  useEffect(() => {
+    const lastMovieRequest = JSON.parse(localStorage.getItem("lastMoviesRequest"));
+    const lastCheckboxState = localStorage.getItem('Checkbox')
+
+    setIsSearch(lastMovieRequest)
+    setChecked(lastCheckboxState)
+  }, [])
 
   const handleChange = (evt) => {
     setIsSearch(evt.target.value);
@@ -18,13 +25,13 @@ function SearchForm({ setIsLoading, movies, setMovies, setIsNotMovies }) {
 
   const searchMovies = (title) => {
     const searchedMovies = filterMovies(movies, isSearch);
-    const shortMovies = filterDuration(searchedMovies)
+    const shortMovies = filterMovies(filterDuration(movies), isSearch)
+    console.log(filterDuration(movies))
 
     if (!checked) {
       if (searchedMovies.length > 0) {
         setIsNotMovies(false)
         setMovies(searchedMovies);
-        console.log(searchedMovies)
       } else {
         setIsNotMovies(true)
       }
@@ -41,6 +48,7 @@ function SearchForm({ setIsLoading, movies, setMovies, setIsNotMovies }) {
     localStorage.setItem("lastMoviesRequest", JSON.stringify(title));
     localStorage.setItem("searchMovies", JSON.stringify(searchedMovies));
     localStorage.setItem("shortMovies", JSON.stringify(shortMovies));
+    localStorage.setItem("Checkbox", JSON.stringify(checked));
   }
 
   const handleFormSubmit = (evt) => {

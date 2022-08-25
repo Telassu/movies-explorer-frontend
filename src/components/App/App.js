@@ -16,8 +16,8 @@ import { api } from "../../utils/MainApi";
 import { moviesApi } from "../../utils/MoviesApi";
 
 function App() {
-  const [currentUser, setCurrentUser] = useState({});
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [currentUser, setCurrentUser] = useState({});
   const [isLoading, setIsLoading] = useState(false);
 
   const [shownMovies, setShownMovies] = useState([]);
@@ -30,21 +30,7 @@ function App() {
   const history = useHistory();
 
   //  console.log(localStorage)
-  //  console.log(isLoggedIn)
-
-
-  //получение информации о пользователе
-  useEffect(() => {
-    if (isLoggedIn) {
-      Promise.all([api.getUserInfo(), api.getInitialMovies()])
-        .then(([userInfo, InitialMovies]) => {
-          setCurrentUser(userInfo);
-          setSavedMovies(InitialMovies)
-          localStorage.setItem("InitialMovies", JSON.stringify(InitialMovies))
-        })
-        .catch((err) => console.log("ERROR! =>", err));
-    }
-  }, [isLoggedIn]);
+  //console.log(isLoggedIn)
 
   //проверка токена
   useEffect(() => {
@@ -58,6 +44,19 @@ function App() {
       })
       .catch((err) => console.log("ERROR! =>", err));
   }, [history])
+
+  //получение информации о пользователе
+  useEffect(() => {
+    if (isLoggedIn) {
+      Promise.all([api.getUserInfo(), api.getInitialMovies()])
+        .then(([userInfo, InitialMovies]) => {
+          setCurrentUser(userInfo);
+          setSavedMovies(InitialMovies)
+          localStorage.setItem("InitialMovies", JSON.stringify(InitialMovies))
+        })
+        .catch((err) => console.log("ERROR! =>", err));
+    }
+  }, [isLoggedIn]);
 
   //регистрация
   const handleRegister = (name, email, password) => {
@@ -160,6 +159,12 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
         <Switch>
+          <Route exact path="/">
+            <Main
+              isLoggedIn={isLoggedIn}
+            />
+          </Route>
+
           <ProtectedRoute
             path="/movies"
             isLoggedIn={isLoggedIn}
@@ -198,12 +203,6 @@ function App() {
             OnSignOut={handleSignOut}
             onUpdateUser={handleOnUpdateUser}
           />
-
-          <Route exact path="/">
-            <Main
-              isLoggedIn={isLoggedIn}
-            />
-          </Route>
 
           <Route path="/signin">
             <Login

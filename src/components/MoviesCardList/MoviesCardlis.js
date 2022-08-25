@@ -29,7 +29,7 @@ function MoviesCardlist({ movies, onCardSaved, onCardDelete, pageSavedMovies, sa
     } else if (addCardsRow.total > movies.length) {
       setIsButtonHidden(false)
     }
-  }, [addCardsRow.total]);
+  }, [movies.length, addCardsRow.total]);
 
   const addMoreCards = () => {
     setAddCardsRow({
