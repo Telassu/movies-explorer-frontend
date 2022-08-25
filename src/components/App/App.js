@@ -81,6 +81,7 @@ function App() {
   function hadleLogin(email, password) {
     setIsLoading(true)
     setIsDisabledInput(true)
+
     auth
       .login(email, password)
       .then((res) => {

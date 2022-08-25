@@ -8,14 +8,13 @@ import { filterDuration, filterMovies } from "../../utils/FilterMovies";
 function SearchForm({ setIsLoading, movies, setMovies, setIsNotMovies }) {
   const [isSearch, setIsSearch] = useState('');
   const [isError, setIsError] = useState(false);
-  const [checked, setChecked] = useState(true);
+  const [isChecked, setIsChecked] = useState(true);
 
   useEffect(() => {
     const lastMovieRequest = JSON.parse(localStorage.getItem("lastMoviesRequest"));
     const lastCheckboxState = localStorage.getItem('Checkbox')
-
     setIsSearch(lastMovieRequest)
-    setChecked(lastCheckboxState)
+    setIsChecked(lastCheckboxState)
   }, [])
 
   const handleChange = (evt) => {
@@ -27,27 +26,20 @@ function SearchForm({ setIsLoading, movies, setMovies, setIsNotMovies }) {
     const searchedMovies = filterMovies(movies, isSearch);
     const shortMovies = filterMovies(filterDuration(movies), isSearch)
 
-    if (!checked) {
-      if (searchedMovies.length > 0) {
-        setIsNotMovies(false)
-        setMovies(searchedMovies);
-      } else {
-        setIsNotMovies(true)
-      }
-    }
-    else {
-      if (shortMovies.length > 0) {
-        setIsNotMovies(false)
+    if (searchedMovies.length !== 0 || shortMovies.length !== 0) {
+      if (isChecked === true) {
         setMovies(shortMovies);
       } else {
-        setIsNotMovies(true)
+        setMovies(searchedMovies)
       }
+    } else {
+      setIsNotMovies(true)
     }
 
     localStorage.setItem("lastMoviesRequest", JSON.stringify(title));
     localStorage.setItem("searchMovies", JSON.stringify(searchedMovies));
     localStorage.setItem("shortMovies", JSON.stringify(shortMovies));
-    localStorage.setItem("Checkbox", JSON.stringify(checked));
+    localStorage.setItem("Checkbox", JSON.stringify(isChecked));
   }
 
   const handleFormSubmit = (evt) => {
@@ -93,8 +85,8 @@ function SearchForm({ setIsLoading, movies, setMovies, setIsNotMovies }) {
       <FilterCheckbox
         setMovies={setMovies}
         movies={movies}
-        checked={checked}
-        setChecked={setChecked}
+        isChecked={isChecked}
+        setIsChecked={setIsChecked}
       />
     </section>
   )
