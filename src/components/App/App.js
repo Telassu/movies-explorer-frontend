@@ -25,25 +25,10 @@ function App() {
   const [isNotMovies, setIsNotMovies] = useState(false);
 
   const [isErrorMessage, setIsErrorMessage] = useState('');
+  const [isDisabledInput, setIsDisabledInput] = useState(false)
   const allMovies = JSON.parse(localStorage.getItem('allMovies'));
 
   const history = useHistory();
-
-  //  console.log(localStorage)
-  //console.log(isLoggedIn)
-
-  //проверка токена
-  useEffect(() => {
-    auth
-      .checkToken()
-      .then((res) => {
-        if (res) {
-          localStorage.setItem('IsLoggedIn', true)
-          setIsLoggedIn(true);
-        }
-      })
-      .catch((err) => console.log("ERROR! =>", err));
-  }, [history])
 
   //получение информации о пользователе
   useEffect(() => {
@@ -58,8 +43,25 @@ function App() {
     }
   }, [isLoggedIn]);
 
+  useEffect(() => {
+    auth
+      .checkToken()
+      .then((res) => {
+        if (res) {
+          setIsLoggedIn(true);
+          localStorage.setItem('IsLoggedIn', true)
+          history.push("/movies");
+        }
+      })
+      .catch((err) => console.log("ERROR! =>", err));
+  }, [history])
+
   //регистрация
   const handleRegister = (name, email, password) => {
+    setIsLoading(true)
+    setIsDisabledInput(true)
+    setIsErrorMessage('')
+
     auth
       .register(name, email, password)
       .then(() => {
@@ -67,22 +69,30 @@ function App() {
         setIsLoggedIn(true)
         history.push("/movies")
       })
-      .catch((err) => {
-        setIsErrorMessage('При регистрации пользователя произошла ошибка.')
-      })
+      .catch((err) => console.log("ERROR! =>", err))
+      .finally(() => {
+        setIsLoading(false)
+        setIsDisabledInput(false)
+      }
+      )
   }
 
   //авторизация
   function hadleLogin(email, password) {
+    setIsLoading(true)
+    setIsDisabledInput(true)
     auth
       .login(email, password)
       .then((res) => {
         history.push("/movies")
         setIsLoggedIn(true)
       })
-      .catch((err) => {
-        setIsErrorMessage('Вы ввели неправильный логин или пароль.')
-      })
+      .catch((err) => console.log("ERROR! =>", err))
+      .finally(() => {
+        setIsLoading(false)
+        setIsDisabledInput(false)
+      }
+      )
   }
 
   //обновление информации пользователя
@@ -96,10 +106,7 @@ function App() {
         setIsErrorMessage("Данные успешно обновлены")
       })
 
-      .catch((err) => {
-        console.log("ERROR! =>", err);
-        setIsErrorMessage(err)
-      })
+      .catch((err) => console.log("ERROR! =>", err))
       .finally(() => setIsLoading(false));
   }
 
@@ -159,12 +166,6 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
         <Switch>
-          <Route exact path="/">
-            <Main
-              isLoggedIn={isLoggedIn}
-            />
-          </Route>
-
           <ProtectedRoute
             path="/movies"
             isLoggedIn={isLoggedIn}
@@ -204,16 +205,25 @@ function App() {
             onUpdateUser={handleOnUpdateUser}
           />
 
+          <Route exact path="/">
+            <Main
+              isLoggedIn={isLoggedIn}
+            />
+          </Route>
+
+
           <Route path="/signin">
             <Login
               onLogin={hadleLogin}
               isErrorMessage={isErrorMessage}
+              isDisabledInput={isDisabledInput}
             />
           </Route>
           <Route path="/signup">
             <Register
               onRegister={handleRegister}
               isErrorMessage={isErrorMessage}
+              isDisabledInput={isDisabledInput}
             />
           </Route>
 

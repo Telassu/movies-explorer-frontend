@@ -8,27 +8,28 @@ import SearchForm from "../SearchForm/SearchForm";
 import Preloader from "../Preloader/Preloader";
 
 function Movies(props) {
-  console.log(localStorage)
+  //  console.log(localStorage)
 
   // результаты последнего поиска
   useEffect(() => {
     const lastSearchedMovie = JSON.parse(localStorage.getItem("searchMovies"));
     const lastShortMovie = JSON.parse(localStorage.getItem("shortMovies"));
     const lastCheckboxState = localStorage.getItem('Checkbox')
-
-    if (lastCheckboxState === true) {
-      if (lastShortMovie.length > 0) {
-        props.setMovies(lastShortMovie)
-      }
-      else {
-        props.setIsNotMovies(true)
-      }
-    } else {
-      if (lastSearchedMovie.length > 0) {
-        props.setMovies(lastSearchedMovie)
-      }
-      else {
-        props.setIsNotMovies(true)
+    if (localStorage.getItem("searchMovies")) {
+      if (lastCheckboxState === true) {
+        if (lastShortMovie.length > 0) {
+          props.setMovies(lastShortMovie)
+        }
+        else {
+          props.setIsNotMovies(true)
+        }
+      } else {
+        if (lastSearchedMovie.length > 0) {
+          props.setMovies(lastSearchedMovie)
+        }
+        else {
+          props.setIsNotMovies(true)
+        }
       }
     }
   }, [])

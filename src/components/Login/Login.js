@@ -32,6 +32,7 @@ function Login(props) {
           className="input login__input login__input_type_email"
           placeholder="E-mail"
           required
+          disabled={props.isDisabledInput}
           value={values.email || ""}
           onChange={handleChange}
         />
@@ -46,6 +47,7 @@ function Login(props) {
           className="input login__input login__input_type_password"
           placeholder="Пароль"
           required
+          disabled={props.isDisabledInput}
           value={values.password || ""}
           onChange={handleChange}
         />

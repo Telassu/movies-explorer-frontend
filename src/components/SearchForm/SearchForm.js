@@ -26,7 +26,6 @@ function SearchForm({ setIsLoading, movies, setMovies, setIsNotMovies }) {
   const searchMovies = (title) => {
     const searchedMovies = filterMovies(movies, isSearch);
     const shortMovies = filterMovies(filterDuration(movies), isSearch)
-    console.log(filterDuration(movies))
 
     if (!checked) {
       if (searchedMovies.length > 0) {

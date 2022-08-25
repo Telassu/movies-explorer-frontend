@@ -33,6 +33,7 @@ function Register(props) {
           placeholder="Имя"
           minLength="2"
           maxLength="30"
+          disabled={props.isDisabledInput}
           required
           value={values.name || ""}
           onChange={handleChange}
@@ -48,6 +49,7 @@ function Register(props) {
           className="input auth__input auth__input_type_email"
           placeholder="E-mail"
           required
+          disabled={props.isDisabledInput}
           value={values.email || ""}
           onChange={handleChange}
 
@@ -63,6 +65,7 @@ function Register(props) {
           className="input auth__input auth__input_type_password"
           placeholder="Пароль"
           required
+          disabled={props.isDisabledInput}
           value={values.password || ""}
           onChange={handleChange}
         />

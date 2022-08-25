@@ -76,31 +76,6 @@ class Api {
 
       .then(this._checkRes)
   }
-  /*
-    editNewAvatar (dataAvatar) {
-      return fetch(`${this._url}/users/me/avatar`, {
-        method: 'PATCH',
-        headers: this._headers,
-        credentials: 'include',
-        body: JSON.stringify({
-          avatar: dataAvatar
-        })
-      })
-  
-      .then (this._checkRes)
-    }
-    */
-  /*
-      changeLikeCardStatus (id, isLiked) {
-        return fetch (`${this._url}/cards/${id}/likes`, {
-          method: `${isLiked ? 'DELETE' : 'PUT'}`,
-          headers: this._headers,
-          credentials: 'include',
-      })
-    
-      .then (this._checkRes)
-    }
-    */
 }
 
 export const api = new Api({
