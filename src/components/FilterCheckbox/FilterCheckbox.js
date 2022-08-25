@@ -6,7 +6,6 @@ function FilterCheckbox({ isChecked, setIsChecked }) {
     setIsChecked(!isChecked)
   }
 
-  console.log(isChecked)
   return (
     <label className="checkbox__label">
       <input
