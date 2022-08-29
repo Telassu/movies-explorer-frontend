@@ -54,8 +54,6 @@ function Movies(props) {
     }
   }, [])
 
-  console.log(localStorage)
-
   return (
     <>
       <Header

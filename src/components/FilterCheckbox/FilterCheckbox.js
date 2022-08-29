@@ -10,7 +10,7 @@ function FilterCheckbox({
     setIsChecked(!isChecked);
     handleShortMovies();
   }
-
+  console.log(isChecked)
   return (
     <label className="checkbox__label"
     >

@@ -83,6 +83,9 @@ function CardButton({
           < img
             className="movie__delete-button"
             src={Delete}
+            hidden={
+              desktopWidth ? isButtonHidden : false
+            }
             alt="удалить фильм"
             onClick={handleMovieDelete}
           />

@@ -229,6 +229,7 @@ function App() {
             setIsChecked={setIsChecked}
             movies={savedMovies}
             setSavedMovies={setSavedMovies}
+            setShownMovies={setShownMovies}
             onCardDelete={handleMovieDelete}
           />
           <ProtectedRoute

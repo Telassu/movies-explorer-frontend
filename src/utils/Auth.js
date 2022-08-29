@@ -19,7 +19,6 @@ export const register = (name, email, password) => {
         body: JSON.stringify({ name, email, password }),
     })
         .then(checkRes)
-        .then((res) => console.log(res))
 };
 
 export const login = (email, password) => {

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
@@ -8,6 +8,11 @@ import Preloader from "../Preloader/Preloader";
 
 function SavedMovies(props) {
   const pageSavedMovies = true;
+
+  useEffect(() => {
+    props.setShownMovies(props.movies)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <>
