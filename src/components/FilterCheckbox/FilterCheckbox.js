@@ -1,22 +1,25 @@
 import React from "react"
 
-function FilterCheckbox({ isChecked, setIsChecked }) {
+function FilterCheckbox({
+  isChecked,
+  setIsChecked,
+  handleShortMovies
+}) {
 
   const handleToggle = () => {
-    setIsChecked(!isChecked)
+    setIsChecked(!isChecked);
+    handleShortMovies();
   }
 
   return (
-    <label className="checkbox__label">
+    <label className="checkbox__label"
+    >
       <input
         type="checkbox"
         id="checkbox"
         className="checkbox"
-        value={localStorage.getItem("Checkbox")
-          ? localStorage.getItem("Checkbox")
-          : isChecked
-        }
-        defaultChecked={isChecked}
+        checked={isChecked}
+
         onChange={handleToggle}
       />
       <span className="visible-checkbox"></span>

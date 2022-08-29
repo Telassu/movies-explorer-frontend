@@ -21,10 +21,10 @@ function Login(props) {
       linkText="Регистрация"
       onSubmit={handleSubmit}
       isValid={isValid}
+      isDisabledButton={props.isDisabledButton}
       isErrorMessage={props.isErrorMessage}
     >
-      <div>
-        <label className="input-caption login__input-caption">Email</label>
+      <label className="input-caption login__input-caption">Email
         <input
           type="email"
           name="email"
@@ -36,10 +36,10 @@ function Login(props) {
           value={values.email || ""}
           onChange={handleChange}
         />
-        <span className="input-error login__input-error name-input-error">{errors.email}</span>
-      </div>
-      <div>
-        <label className="input-caption login__input-caption">Пароль</label>
+        <p className="input-error login__input-error name-input-error">{errors.email}</p>
+
+      </label>
+      <label className="input-caption login__input-caption">Пароль
         <input
           type="password"
           name="password"
@@ -51,8 +51,8 @@ function Login(props) {
           value={values.password || ""}
           onChange={handleChange}
         />
-        <span className="input-error login__input-error name-input-error">{errors.password}</span>
-      </div>
+      </label>
+      <p className="input-error login__input-error name-input-error">{errors.password}</p>
     </Form>
   );
 };

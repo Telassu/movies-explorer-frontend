@@ -1,4 +1,4 @@
-.movie__save-button{
+.movie__save-button {
   width: 72px;
   height: 21px;
   border-radius: 30px;
@@ -13,12 +13,19 @@
   top: 14px;
   right: 14px;
 }
-
+/*
+.movie__save-button_hidden {
+  visibility: hidden;
+  position: absolute;
+  top: 14px;
+  right: 14px;
+}
+*/
 .movie__save-button:hover {
   cursor: pointer;
 }
 
-.movie__saved{
+.movie__saved {
   width: 21px;
   height: 21px;
   border: none;
@@ -27,7 +34,7 @@
   right: 14px;
 }
 
-.movie__delete-button{
+.movie__delete-button {
   width: 21px;
   height: 21px;
   background-color: #313131;
@@ -36,7 +43,7 @@
   top: 14px;
   right: 14px;
 }
-  
+
 .movie__delete-button:hover {
   cursor: pointer;
 }

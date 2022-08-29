@@ -8,20 +8,23 @@ function Profile(props) {
   const nameInput = createRef();
   const emailInput = createRef();
   const currentUser = useContext(CurrentUserContext)
-  const { values, setValues, errors, isValid, handleChange, resetForm } = useFormWithValidation();
+  const { values, setValues, errors, isValid, handleChange } = useFormWithValidation();
 
   const [isActive, setIsActive] = useState(false);
-  const [inputActive, setInputValid] = useState(false)
+  const [inputActive, setInputActive] = useState(false);
 
-  //  console.log(currentUser)
   useEffect(() => {
-    setValues({ name: currentUser.name, email: currentUser.email })
+    setValues({
+      name: currentUser.name,
+      email: currentUser.email
+    })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentUser])
 
   function editProfile() {
+    props.setIsErrorMessage('')
     setIsActive(true);
-    setInputValid(true);
+    setInputActive(true);
   }
 
   const handleFormSubmit = (evt) => {
@@ -31,13 +34,11 @@ function Profile(props) {
       name: values.name,
       email: values.email
     });
-
-    resetForm();
+    setIsActive(false);
   }
 
   const handleToggle = () => {
-    setIsActive(false);
-    setInputValid(false);
+    setInputActive(false);
   }
 
   return (
@@ -60,7 +61,7 @@ function Profile(props) {
                 minLength="2"
                 maxLength="30"
                 required
-                disabled={!inputActive}
+                disabled={!inputActive || props.isDisabledInput}
                 onChange={handleChange}
                 value={values.name || ''}
               />
@@ -75,14 +76,15 @@ function Profile(props) {
                 className="profile__input profile__input_type_email"
                 placeholder="E-mail"
                 required
-                disabled={!inputActive}
+                pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]{2,}$"
+                disabled={!inputActive || props.isDisabledInput}
                 onChange={handleChange}
                 value={values.email || ''}
               />
             </label>
             <span className="profile__input-error"> {errors.email}</span>
           </div>
-          <span className="error-message" hidden={!isActive}>{props.isErrorMessage}</span>
+          <span className="error-message">{props.isErrorMessage}</span>
           <div className="profile__buttons">
             <button type="button" className={`profile__button ${isActive ? `profile__button_hidden` : ``}`} onClick={editProfile}>Редактировать</button>
             <button
@@ -95,7 +97,11 @@ function Profile(props) {
             <button
               type="submit"
               className={`profile__button ${!isActive ? `profile__button_hidden` : ``} profile__save-button`}
-              disabled={!isValid}
+              disabled={
+                !isValid
+                || props.isDisabledButton
+                || (currentUser.name === values.name && currentUser.email === values.email)
+              }
               onClick={handleToggle}
             >Сохранить</button>
           </div>

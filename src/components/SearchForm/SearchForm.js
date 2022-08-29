@@ -5,16 +5,25 @@ import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 
 import { filterDuration, filterMovies } from "../../utils/FilterMovies";
 
-function SearchForm({ setIsLoading, movies, setMovies, setIsNotMovies }) {
+function SearchForm({ setIsLoading, movies, setMovies, setIsNotMovies, pageSavedMovies, isChecked, setIsChecked, shownMovies }) {
+  //поисковый запрос
   const [isSearch, setIsSearch] = useState('');
+  //ошибка формы запроса
   const [isError, setIsError] = useState(false);
-  const [isChecked, setIsChecked] = useState(true);
+  //сохранение поисковых запросов
+  const [isShortMovies, setIsShortMovies] = useState([])
+  const [isSearchedMovies, setIsSearchedMovies] = useState([])
 
   useEffect(() => {
     const lastMovieRequest = JSON.parse(localStorage.getItem("lastMoviesRequest"));
-    const lastCheckboxState = localStorage.getItem('Checkbox')
-    setIsSearch(lastMovieRequest)
-    setIsChecked(lastCheckboxState)
+
+    if (pageSavedMovies) {
+      setIsSearch(' ');
+
+    } else {
+      setIsSearch(lastMovieRequest)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const handleChange = (evt) => {
@@ -22,25 +31,49 @@ function SearchForm({ setIsLoading, movies, setMovies, setIsNotMovies }) {
     setIsError(evt.target.validationMessage)
   }
 
-  const searchMovies = (title) => {
-    const searchedMovies = filterMovies(movies, isSearch);
-    const shortMovies = filterMovies(filterDuration(movies), isSearch)
+  const handleShortMovies = () => {
+    const shortMovies = filterDuration(movies)
+    setIsShortMovies(shortMovies)
+  }
 
-    if (searchedMovies.length !== 0 || shortMovies.length !== 0) {
-      if (isChecked === true) {
-        setMovies(shortMovies);
+  const searchMovies = (title) => {
+
+    if (isChecked) {
+      const shortResult = filterMovies(isShortMovies, title)
+      if (shortResult.length === 0) {
+        setIsNotMovies(true)
+        localStorage.setItem("shortMovies", JSON.stringify([]));
       } else {
-        setMovies(searchedMovies)
+        setMovies(shortResult)
+        localStorage.setItem("shortMovies", JSON.stringify(shortResult));
       }
     } else {
-      setIsNotMovies(true)
+      const allResult = filterMovies(movies, title)
+
+      if (allResult.length === 0) {
+        setIsNotMovies(true)
+        localStorage.setItem("searchMovies", JSON.stringify([]));
+      } else {
+        setMovies(allResult)
+        setIsSearchedMovies(allResult)
+        localStorage.setItem("searchMovies", JSON.stringify(allResult));
+      }
     }
 
     localStorage.setItem("lastMoviesRequest", JSON.stringify(title));
-    localStorage.setItem("searchMovies", JSON.stringify(searchedMovies));
-    localStorage.setItem("shortMovies", JSON.stringify(shortMovies));
-    localStorage.setItem("Checkbox", JSON.stringify(isChecked));
+    localStorage.setItem("lastCheckboxState", JSON.stringify(isChecked));
   }
+
+  useEffect(() => {
+    if (!pageSavedMovies) {
+      if (isChecked) {
+        setMovies(filterDuration(shownMovies))
+      } else {
+        searchMovies(isSearch)
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isChecked])
 
   const handleFormSubmit = (evt) => {
     evt.preventDefault();
@@ -49,6 +82,7 @@ function SearchForm({ setIsLoading, movies, setMovies, setIsNotMovies }) {
       setIsError(true)
     } else {
       setIsLoading(true);
+      setIsNotMovies(false);
       searchMovies(isSearch);
       setIsLoading(false)
     }
@@ -83,10 +117,17 @@ function SearchForm({ setIsLoading, movies, setMovies, setIsNotMovies }) {
         ></button>
       </form>
       <FilterCheckbox
-        setMovies={setMovies}
-        movies={movies}
         isChecked={isChecked}
         setIsChecked={setIsChecked}
+        searchMovies={searchMovies}
+        isSearch={isSearch}
+        setIsError={setIsError}
+        setIsLoading={setIsLoading}
+        setIsNotMovies={setIsNotMovies}
+        handleFormSubmit={handleFormSubmit}
+        pageSavedMovies={pageSavedMovies}
+        handleShortMovies={handleShortMovies}
+        isSearchedMovies={isSearchedMovies}
       />
     </section>
   )

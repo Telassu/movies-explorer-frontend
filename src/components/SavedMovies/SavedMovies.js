@@ -16,10 +16,14 @@ function SavedMovies(props) {
       />
       <main className="saved-movies">
         <SearchForm
-          movies={props.movies}
-          setMovies={props.setMovies}
+          isLoading={props.isLoading}
           setIsLoading={props.setIsLoading}
+          movies={props.movies}
+          setMovies={props.setShownMovies}
           setIsNotMovies={props.setIsNotMovies}
+          pageSavedMovies={pageSavedMovies}
+          isChecked={props.isChecked}
+          setIsChecked={props.setIsChecked}
         />
         {props.isLoading
           ? <Preloader /> : ''}

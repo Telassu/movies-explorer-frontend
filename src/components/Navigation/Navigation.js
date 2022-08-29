@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 function Navigation(props) {
 
@@ -34,12 +34,12 @@ function Navigation(props) {
             <>
               <ul className="navigation__links navigation__links_login">
                 <li className="navigation__button">
-                  <Link to="/movies" className="navigation__link">
+                  <NavLink to="/movies" activeClassName="navigation__link_active" className="navigation__link">
                     Фильмы
-                  </Link>
-                  <Link to="/saved-movies" className="navigation__link">
+                  </NavLink>
+                  <NavLink to="/saved-movies" activeClassName="navigation__link_active" className="navigation__link">
                     Сохранённые фильмы
-                  </Link>
+                  </NavLink>
                 </li>
                 <li className="navigation__button navigation__button_account">
                   <Link to="/profile" className="navigation__link">Аккаунт</Link>
@@ -69,14 +69,14 @@ function Navigation(props) {
             </Link>
           </li>
           <li className="navigation__button navigation__button_burger">
-            <Link to="/movies" className="navigation__link">
+            <NavLink to="/movies" className="navigation__link" activeClassName="navigation__link_active">
               Фильмы
-            </Link>
+            </NavLink>
           </li>
           <li className="navigation__button navigation__button_burger">
-            <Link to="/saved-movies" className="navigation__link">
+            <NavLink to="/saved-movies" className="navigation__link" activeClassName="navigation__link_active">
               Сохранённые фильмы
-            </Link>
+            </NavLink>
           </li>
         </ul>
         <button className="navigation__button_account">

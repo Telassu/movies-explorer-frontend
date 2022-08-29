@@ -32,7 +32,6 @@
   margin: 3px 0;
 }
 
-
 .input-error {
   max-width: 100%;
   font-weight: 400;
@@ -117,14 +116,6 @@
   cursor: pointer;
 }
 
-.input-error {
-  color: #ee3465;
-  font-weight: 400;
-  font-size: 10px;
-  line-height: 12px;
-  margin: 0;
-}
-
 @media screen and (max-width: 500px) {
   .form-container {
     width: 100%;
@@ -134,7 +125,7 @@
     padding-top: 56px;
     margin-top: 0;
   }
-  
+
   .form {
     width: calc(100% - 60px);
     height: calc(100vh - 250px);
@@ -145,7 +136,7 @@
 
   .form__save-button {
     width: 100%;
-    margin: 0;   
+    margin: 0;
   }
 
   .form__buttons {
@@ -163,7 +154,7 @@
   .form__link {
     font-size: 12px;
     line-height: 15px;
-  }  
+  }
 
   .form__buttons {
     margin-bottom: 30px;

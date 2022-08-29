@@ -2,19 +2,25 @@ import React, { useState } from "react";
 
 import CardButton from "../CardButton/CardButton";
 
-function MoviesCard({ movie, onCardSaved, onCardDelete, pageSavedMovies, savedMovies }) {
+function MoviesCard({
+  movie,
+  onCardSaved,
+  onCardDelete,
+  pageSavedMovies,
+  savedMovies
+}) {
   const baseURL = 'https://api.nomoreparties.co';
 
-  const [isButton, setIsButton] = useState(true);
+  const [isButtonHidden, setIsButtonHidden] = useState(true);
 
-  const isSaved = movie.id && savedMovies.some(el => el.movieId === movie.id)
+  const isSaved = movie.id && savedMovies.some(el => el.movieId === movie.id);
 
   const showButton = () => {
-    setIsButton(false)
+    setIsButtonHidden(false)
   }
 
   const hideButton = () => {
-    setIsButton(true)
+    setIsButtonHidden(true)
   }
 
   function getTime(duration) {
@@ -40,7 +46,7 @@ function MoviesCard({ movie, onCardSaved, onCardDelete, pageSavedMovies, savedMo
           <p className="movie__name">{movie.nameRU}</p>
           <div className="movie__time-container">{getTime(movie.duration)}</div>
         </div>
-        <div className={`${isButton ? `movie__button_hidden` : ` `}`}>
+        <div className="movie__button">
           <CardButton
             movie={movie}
             onCardSaved={onCardSaved}
@@ -48,6 +54,7 @@ function MoviesCard({ movie, onCardSaved, onCardDelete, pageSavedMovies, savedMo
             isSaved={isSaved}
             pageSavedMovies={pageSavedMovies}
             savedMovies={savedMovies}
+            isButtonHidden={isButtonHidden}
           />
         </div>
       </li>

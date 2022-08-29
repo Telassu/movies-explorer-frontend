@@ -5,10 +5,25 @@ import { Route, Switch } from "react-router-dom";
 
 import Delete from "../../images/delete.svg"
 import Saved from "../../images/saved.svg";
+import useWindowSize from "../../utils/WindowSize";
+import {
+  WIDTH_SCREEN_TABLET,
+} from '../../utils/constants'
 
 
-function CardButton({ onCardSaved, movie, onCardDelete, isSaved, pageSavedMovies, savedMovies }) {
+function CardButton({
+  onCardSaved,
+  movie,
+  onCardDelete,
+  isSaved,
+  pageSavedMovies,
+  savedMovies,
+  isButtonHidden,
+}) {
+
   const [isSaveMovieIcon, setIsSaveMovieIcon] = useState(false);
+  const size = useWindowSize();
+  const desktopWidth = size.width >= WIDTH_SCREEN_TABLET;
 
   const currentMovie = movie.id && savedMovies.filter(el => el.movieId === movie.id)
 
@@ -26,12 +41,17 @@ function CardButton({ onCardSaved, movie, onCardDelete, isSaved, pageSavedMovies
     } else {
       onCardDelete(currentMovie[0]._id)
     }
-    setIsSaveMovieIcon(false)
+
+    isSaved
+      ? setIsSaveMovieIcon(false)
+      : setIsSaveMovieIcon(true)
   }
 
   const handleMovieSave = () => {
     onCardSaved(movie)
-    setIsSaveMovieIcon(true)
+    isSaved
+      ? setIsSaveMovieIcon(true)
+      : setIsSaveMovieIcon(false)
   }
 
   return (
@@ -48,6 +68,9 @@ function CardButton({ onCardSaved, movie, onCardDelete, isSaved, pageSavedMovies
             : <button
               type="button"
               className="movie__save-button"
+              hidden={
+                desktopWidth ? isButtonHidden : false
+              }
               aria-label="сохранить"
               onClick={handleMovieSave}
             >

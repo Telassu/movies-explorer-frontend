@@ -11,10 +11,11 @@
   align-items: center;
   justify-content: space-between;
   color: #fff;
+  position: relative;
 }
 
 .error-message {
-  color: #ff004C;
+  color: #ff004c;
   font-weight: 400;
   font-size: 11px;
   line-height: 13px;

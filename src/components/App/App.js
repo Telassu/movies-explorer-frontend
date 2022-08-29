@@ -13,20 +13,32 @@ import CurrentUserContext from "../../contexts/CurrentUserContext";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import * as auth from "../../utils/Auth";
 import { api } from "../../utils/MainApi";
-import { moviesApi } from "../../utils/MoviesApi";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
-  const [isLoading, setIsLoading] = useState(false);
 
+  //фильмы, отображающиеся в "Фильмы"
   const [shownMovies, setShownMovies] = useState([]);
+  //фильмы, отображающиеся в "Сохраненные фильмы"
   const [savedMovies, setSavedMovies] = useState([]);
+  //"Ничего не найдено"
   const [isNotMovies, setIsNotMovies] = useState(false);
-
-  const [isErrorMessage, setIsErrorMessage] = useState('');
-  const [isDisabledInput, setIsDisabledInput] = useState(false)
+  //массив всех фильмов
   const allMovies = JSON.parse(localStorage.getItem('allMovies'));
+
+  //состояние чекбокса
+  const [isChecked, setIsChecked] = useState(`${localStorage.getItem('lastCheckboxState')
+    ? JSON.parse(localStorage.getItem('lastCheckboxState'))
+    : true
+    }`);
+  //состояние лоадера
+  const [isLoading, setIsLoading] = useState(false);
+  //сообщение для пользователя об ошибках сервера
+  const [isErrorMessage, setIsErrorMessage] = useState('');
+  //блокирование инпутов и кнопки сохранения на время обработки запроса
+  const [isDisabledInput, setIsDisabledInput] = useState(false);
+  const [isDisabledButton, setIsDisabledButton] = useState(false)
 
   const history = useHistory();
 
@@ -50,37 +62,18 @@ function App() {
         if (res) {
           setIsLoggedIn(true);
           localStorage.setItem('IsLoggedIn', true)
-          history.push("/movies");
+          history.push("/");
         }
       })
       .catch((err) => console.log("ERROR! =>", err));
   }, [history])
 
-  //регистрация
-  const handleRegister = (name, email, password) => {
-    setIsLoading(true)
-    setIsDisabledInput(true)
-    setIsErrorMessage('')
-
-    auth
-      .register(name, email, password)
-      .then(() => {
-        auth.login(email, password)
-        setIsLoggedIn(true)
-        history.push("/movies")
-      })
-      .catch((err) => console.log("ERROR! =>", err))
-      .finally(() => {
-        setIsLoading(false)
-        setIsDisabledInput(false)
-      }
-      )
-  }
-
   //авторизация
+  // добавить ошибки авторизации
   function hadleLogin(email, password) {
     setIsLoading(true)
     setIsDisabledInput(true)
+    setIsDisabledButton(true)
 
     auth
       .login(email, password)
@@ -88,17 +81,56 @@ function App() {
         history.push("/movies")
         setIsLoggedIn(true)
       })
-      .catch((err) => console.log("ERROR! =>", err))
+      .catch((err) => {
+        if (400) {
+          setIsErrorMessage('Вы ввели неправильный логин или пароль.');
+        } else {
+          setIsErrorMessage('При авторизации произошла ошибка.')
+        }
+        console.log("ERROR =>", err)
+      })
       .finally(() => {
         setIsLoading(false)
         setIsDisabledInput(false)
+        setIsDisabledButton(false)
+      }
+      )
+  }
+
+  //регистрация
+  const handleRegister = (name, email, password) => {
+    setIsLoading(true)
+    setIsDisabledInput(true)
+    setIsDisabledButton(true)
+
+    auth
+      .register(name, email, password)
+
+      .then(() => {
+        hadleLogin(email, password)
+        setIsErrorMessage('')
+      })
+      .catch((err) => {
+        if (409) {
+          setIsErrorMessage('Пользователь с таким email уже существует.');
+        } else {
+          setIsErrorMessage('При регистрации пользователя произошла ошибка.')
+        }
+      })
+      .finally(() => {
+        setIsLoading(false)
+        setIsDisabledInput(false)
+        setIsDisabledButton(false)
       }
       )
   }
 
   //обновление информации пользователя
   const handleOnUpdateUser = (user) => {
-    setIsLoading(true);
+    setIsLoading(true)
+    setIsDisabledInput(true)
+    setIsDisabledButton(true)
+    setIsErrorMessage('')
 
     api
       .editUserInfo(user.name, user.email)
@@ -106,27 +138,24 @@ function App() {
         setCurrentUser(user);
         setIsErrorMessage("Данные успешно обновлены")
       })
-
-      .catch((err) => console.log("ERROR! =>", err))
-      .finally(() => setIsLoading(false));
+      .catch((err) => {
+        if (409) {
+          setIsErrorMessage('Пользователь с таким email уже существует.');
+        } else {
+          setIsErrorMessage('При обновлении профиля произошла ошибка.')
+        }
+      })
+      .finally(() => {
+        setIsLoading(false)
+        setIsDisabledInput(false)
+        setIsDisabledButton(false)
+      });
   }
 
-  // получение массива фильмов
-  useEffect(() => {
-    setIsLoading(true);
-    moviesApi
-      .getAllMovies()
-      .then((movies) => {
-        localStorage.setItem('allMovies', JSON.stringify(movies))
-      })
-      .catch((err) => {
-        console.log("ERROR! =>", err);
-        setIsErrorMessage('Во время запроса проишла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте еще раз');
-      })
-      .finally(() => setIsLoading(false));
-  }, [history]);
-
   // сохранение фильма в своем списке
+  //поднять стейт изменения состояния кнопки сохранения из CardButton
+  // добавить к .then, чтобы состояние изменялось только при удачном сохранении
+  //тоже самое исправить в удалении карточки 
   const handleMovieSave = (movie) => {
     setIsLoading(true)
     api
@@ -156,6 +185,8 @@ function App() {
       .then((res) => {
         setIsLoggedIn(false);
         localStorage.clear();
+        setCurrentUser({})
+
         history.push("/");
       })
       .catch((err) => {
@@ -168,33 +199,37 @@ function App() {
       <div className="page">
         <Switch>
           <ProtectedRoute
-            path="/movies"
             isLoggedIn={isLoggedIn}
+            path="/movies"
             component={Movies}
             isLoading={isLoading}
+            setIsLoading={setIsLoading}
             isErrorMessage={isErrorMessage}
             isNotMovies={isNotMovies}
-            setIsLoading={setIsLoading}
-            movies={allMovies}
-            shownMovies={shownMovies}
-            setMovies={setShownMovies}
-            onCardSaved={handleMovieSave}
-            onCardDelete={handleMovieDelete}
             setIsNotMovies={setIsNotMovies}
+            isChecked={isChecked}
+            setIsChecked={setIsChecked}
+            movies={allMovies}
+            setShownMovies={setShownMovies}
+            shownMovies={shownMovies}
             savedMovies={savedMovies}
+            onCardDelete={handleMovieDelete}
+            onCardSaved={handleMovieSave}
           />
           <ProtectedRoute
+            isLoggedIn={isLoggedIn}
             path="/saved-movies"
             component={SavedMovies}
-            isLoggedIn={isLoggedIn}
-            isNotMovies={isNotMovies}
             isLoading={isLoading}
-            isErrorMessage={isErrorMessage}
-            movies={savedMovies}
-            setMovies={setSavedMovies}
             setIsLoading={setIsLoading}
-            onCardDelete={handleMovieDelete}
+            isErrorMessage={isErrorMessage}
+            isNotMovies={isNotMovies}
             setIsNotMovies={setIsNotMovies}
+            isChecked={isChecked}
+            setIsChecked={setIsChecked}
+            movies={savedMovies}
+            setSavedMovies={setSavedMovies}
+            onCardDelete={handleMovieDelete}
           />
           <ProtectedRoute
             path="/profile"
@@ -202,6 +237,9 @@ function App() {
             isLoggedIn={isLoggedIn}
             isErrorMessage={isErrorMessage}
             setIsErrorMessage={setIsErrorMessage}
+            isDisabledInput={isDisabledInput}
+            isDisabledButton={isDisabledButton}
+            setIsDisabledButton={setIsDisabledButton}
             OnSignOut={handleSignOut}
             onUpdateUser={handleOnUpdateUser}
           />
@@ -218,6 +256,7 @@ function App() {
               onLogin={hadleLogin}
               isErrorMessage={isErrorMessage}
               isDisabledInput={isDisabledInput}
+              isDisabledButton={isDisabledButton}
             />
           </Route>
           <Route path="/signup">
@@ -225,6 +264,7 @@ function App() {
               onRegister={handleRegister}
               isErrorMessage={isErrorMessage}
               isDisabledInput={isDisabledInput}
+              isDisabledButton={isDisabledButton}
             />
           </Route>
 

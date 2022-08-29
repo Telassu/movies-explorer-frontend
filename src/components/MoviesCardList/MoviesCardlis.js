@@ -3,19 +3,35 @@ import React, { useEffect, useState } from "react";
 
 import MoviesCard from "../MoviesCard/MoviesCard";
 import useWindowSize from "../../utils/WindowSize";
+import {
+  WIDTH_SCREEN_DESKTOP,
+  WIDTH_SCREEN_TABLET,
+  WIDTH_SCREEN_MOBILE,
+  QUANTITY_CARDS_DESKTOP,
+  QUANTITY_CARDS_TABLET,
+  QUANTITY_CARDS_MOBILE,
+} from '../../utils/constants'
 
-function MoviesCardlist({ movies, onCardSaved, onCardDelete, pageSavedMovies, savedMovies }) {
+function MoviesCardlist({
+  movies,
+  onCardSaved,
+  onCardDelete,
+  pageSavedMovies,
+  savedMovies,
+  isSaveMovieIcon,
+  setIsSaveMovieIcon
+}) {
   const size = useWindowSize();
-  const [addCardsRow, setAddCardsRow] = useState({ total: 12, plus: 3 });
+  const [addCardsRow, setAddCardsRow] = useState(QUANTITY_CARDS_DESKTOP);
   const [isButtonHidden, setIsButtonHidden] = useState(false);
 
   const checkWindow = () => {
-    if (size.width >= 1100) {
-      setAddCardsRow({ total: 12, plus: 3 });
-    } else if (size.width >= 768) {
-      setAddCardsRow({ total: 8, plus: 2 });
-    } else if (size.width >= 320) {
-      setAddCardsRow({ total: 5, plus: 2 })
+    if (size.width >= WIDTH_SCREEN_DESKTOP) {
+      setAddCardsRow(QUANTITY_CARDS_DESKTOP);
+    } else if (size.width >= WIDTH_SCREEN_TABLET) {
+      setAddCardsRow(QUANTITY_CARDS_TABLET);
+    } else if (size.width >= WIDTH_SCREEN_MOBILE) {
+      setAddCardsRow(QUANTITY_CARDS_MOBILE)
     }
   }
 
@@ -49,6 +65,8 @@ function MoviesCardlist({ movies, onCardSaved, onCardDelete, pageSavedMovies, sa
             onCardDelete={onCardDelete}
             pageSavedMovies={pageSavedMovies}
             savedMovies={savedMovies}
+            isSaveMovieIcon={isSaveMovieIcon}
+            setIsSaveMovieIcon={setIsSaveMovieIcon}
           ></MoviesCard>
         ))}
       </ul>

@@ -1,4 +1,5 @@
-const URL = `${window.location.protocol}${process.env.REACT_APP_API_URL}`;
+const baseURL = 'http://localhost:3001';
+//`${window.location.protocol}${process.env.REACT_APP_API_URL}`;
 
 function checkRes(res) {
     if (res.ok) {
@@ -9,7 +10,7 @@ function checkRes(res) {
 }
 
 export const register = (name, email, password) => {
-    return fetch(`${URL}/signup`, {
+    return fetch(`${baseURL}/signup`, {
         method: "POST",
         headers: {
             "Accept": "application/json",
@@ -23,7 +24,7 @@ export const register = (name, email, password) => {
 };
 
 export const login = (email, password) => {
-    return fetch(`${URL}/signin`, {
+    return fetch(`${baseURL}/signin`, {
         method: "POST",
         headers: {
             "Accept": "application/json",
@@ -39,7 +40,7 @@ export const login = (email, password) => {
 };
 
 export const logout = () => {
-    return fetch(`${URL}/signout`, {
+    return fetch(`${baseURL}/signout`, {
         method: "GET",
         headers: {
             "Accept": "application/json",
@@ -51,7 +52,7 @@ export const logout = () => {
 
 
 export const checkToken = () => {
-    return fetch(`${URL}/users/me`, {
+    return fetch(`${baseURL}/users/me`, {
         method: "GET",
         headers: {
             "Accept": "application/json",

@@ -24,7 +24,7 @@ function Form(props) {
             <span className="error-message">{props.isErrorMessage}</span>
             <button
               className={`form__save-button form__save-button_${props.name}`}
-              disabled={!props.isValid}
+              disabled={!props.isValid || props.isDisabledButton}
               type="submit"
               aria-label="сохранить изменения"
             >

@@ -21,10 +21,10 @@ function Register(props) {
       linkText="Войти"
       onSubmit={handleSubmit}
       isValid={isValid}
+      isDisabledButton={props.isDisabledButton}
       isErrorMessage={props.isErrorMessage}
     >
-      <div>
-        <label className="input-caption auth__input-caption">Имя</label>
+      <label className="input-caption auth__input-caption">Имя
         <input
           type="name"
           name="name"
@@ -38,10 +38,9 @@ function Register(props) {
           value={values.name || ""}
           onChange={handleChange}
         />
-        <span className="input-error auth__input-error name-input-error">{errors.name}</span>
-      </div>
-      <div>
-        <label className="input-caption auth__input-caption">E-mail</label>
+      </label>
+      <p className="input-error auth__input-error name-input-error">{errors.name}</p>
+      <label className="input-caption auth__input-caption">E-mail
         <input
           type="email"
           name="email"
@@ -52,10 +51,9 @@ function Register(props) {
           disabled={props.isDisabledInput}
           value={values.email || ""}
           onChange={handleChange}
-
         />
-        <span className="input-error auth__input-error email-input-error">{errors.email}</span>
-      </div>
+      </label>
+      <p className="input-error auth__input-error email-input-error">{errors.email}</p>
       <div>
         <label className="input-caption auth__input-caption">Пароль</label>
         <input
@@ -71,7 +69,7 @@ function Register(props) {
         />
         <span className="input-error auth__input-error password-input-error">{errors.password}</span>
       </div>
-    </Form>
+    </Form >
   );
 };
 

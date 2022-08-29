@@ -1,6 +1,6 @@
 class Api {
   constructor(options) {
-    this._url = options.baseUrl
+    this._url = options.baseURL
     this._headers = options.headers
   }
 
@@ -79,7 +79,8 @@ class Api {
 }
 
 export const api = new Api({
-  baseUrl: `${window.location.protocol}${process.env.REACT_APP_API_URL}`,
+  baseURL: 'http://localhost:3001',
+  //`${window.location.protocol}${process.env.REACT_APP_API_URL}`,
   headers: {
     'Accept': 'application/json',
     'Content-Type': 'application/json',

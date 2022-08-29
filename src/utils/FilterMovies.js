@@ -1,7 +1,8 @@
+import { SHORT_FILM } from "./constants";
+
 //работа фильтра по короткометражкам
 const filterDuration = (movies) =>
-  movies.filter((movie) => movie.duration <= 40);
-
+  movies.filter((movie) => movie.duration <= SHORT_FILM);
 
 //работа поисковика
 const filterMovies = (arr, query) =>
