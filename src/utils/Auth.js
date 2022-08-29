@@ -1,5 +1,4 @@
-const baseURL = 'http://localhost:3001';
-//`${window.location.protocol}${process.env.REACT_APP_API_URL}`;
+const baseURL = `${window.location.protocol}${process.env.REACT_APP_API_URL}`;
 
 function checkRes(res) {
     if (res.ok) {
