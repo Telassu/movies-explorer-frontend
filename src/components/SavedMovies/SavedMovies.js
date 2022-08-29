@@ -10,6 +10,7 @@ function SavedMovies(props) {
   const pageSavedMovies = true;
 
   useEffect(() => {
+    props.setIsNotMovies(false)
     props.setShownMovies(props.movies)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])

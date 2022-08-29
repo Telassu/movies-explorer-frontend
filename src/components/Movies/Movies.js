@@ -77,6 +77,7 @@ function Movies(props) {
           ? <p className="movie-page__not-found">Ничего не найдено</p>
           : <MoviesCardlist
             movies={props.shownMovies}
+            setShownMovies={props.setShownMovies}
             onCardSaved={props.onCardSaved}
             onCardDelete={props.onCardDelete}
             savedMovies={props.savedMovies}

@@ -3,12 +3,14 @@ import React from "react"
 function FilterCheckbox({
   isChecked,
   setIsChecked,
-  handleShortMovies
+  handleShortMovies,
+  checkboxActive
 }) {
 
   const handleToggle = () => {
     setIsChecked(!isChecked);
     handleShortMovies();
+    checkboxActive(!isChecked)
   }
   console.log(isChecked)
   return (
@@ -19,7 +21,6 @@ function FilterCheckbox({
         id="checkbox"
         className="checkbox"
         checked={isChecked}
-
         onChange={handleToggle}
       />
       <span className="visible-checkbox"></span>

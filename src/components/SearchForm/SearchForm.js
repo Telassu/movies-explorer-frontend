@@ -36,6 +36,15 @@ function SearchForm({ setIsLoading, movies, setMovies, setIsNotMovies, pageSaved
     setIsShortMovies(shortMovies)
   }
 
+  const checkboxActive = (isChecked) => {
+    if (isChecked) {
+      setMovies(filterDuration(shownMovies))
+    } else {
+      setMovies(JSON.parse(localStorage.getItem("searchMovies")))
+    }
+
+  }
+
   const searchMovies = (title) => {
 
     if (isChecked) {
@@ -63,17 +72,6 @@ function SearchForm({ setIsLoading, movies, setMovies, setIsNotMovies, pageSaved
     localStorage.setItem("lastMoviesRequest", JSON.stringify(title));
     localStorage.setItem("lastCheckboxState", JSON.stringify(isChecked));
   }
-
-  useEffect(() => {
-    if (!pageSavedMovies) {
-      if (isChecked) {
-        setMovies(filterDuration(shownMovies))
-      } else {
-        setMovies(JSON.parse(localStorage.getItem("searchMovies")))
-      }
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isChecked])
 
   const handleFormSubmit = (evt) => {
     evt.preventDefault();
@@ -128,6 +126,7 @@ function SearchForm({ setIsLoading, movies, setMovies, setIsNotMovies, pageSaved
         pageSavedMovies={pageSavedMovies}
         handleShortMovies={handleShortMovies}
         isSearchedMovies={isSearchedMovies}
+        checkboxActive={checkboxActive}
       />
     </section>
   )

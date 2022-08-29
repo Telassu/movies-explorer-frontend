@@ -31,6 +31,7 @@ function Login(props) {
           id="email"
           className="input login__input login__input_type_email"
           placeholder="E-mail"
+          pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]{2,}$"
           required
           disabled={props.isDisabledInput}
           value={values.email || ""}

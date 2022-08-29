@@ -13,6 +13,7 @@ function Profile(props) {
   const [isActive, setIsActive] = useState(false);
   const [inputActive, setInputActive] = useState(false);
 
+
   useEffect(() => {
     setValues({
       name: currentUser.name,

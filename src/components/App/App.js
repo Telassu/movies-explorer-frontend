@@ -28,9 +28,9 @@ function App() {
   const allMovies = JSON.parse(localStorage.getItem('allMovies'));
 
   //состояние чекбокса
-  const [isChecked, setIsChecked] = useState(`${localStorage.getItem('lastCheckboxState')
-    ? JSON.parse(localStorage.getItem('lastCheckboxState'))
-    : true
+  const [isChecked, setIsChecked] = useState(`${localStorage.getItem('lastCheckboxState') === null
+    ? true
+    : JSON.parse(localStorage.getItem('lastCheckboxState'))
     }`);
   //состояние лоадера
   const [isLoading, setIsLoading] = useState(false);
@@ -69,7 +69,6 @@ function App() {
   }, [history])
 
   //авторизация
-  // добавить ошибки авторизации
   function hadleLogin(email, password) {
     setIsLoading(true)
     setIsDisabledInput(true)
@@ -78,8 +77,10 @@ function App() {
     auth
       .login(email, password)
       .then((res) => {
+        setCurrentUser(res)
         history.push("/movies")
         setIsLoggedIn(true)
+        setIsErrorMessage('')
       })
       .catch((err) => {
         if (400) {
@@ -149,13 +150,11 @@ function App() {
         setIsLoading(false)
         setIsDisabledInput(false)
         setIsDisabledButton(false)
+        setIsErrorMessage('')
       });
   }
 
   // сохранение фильма в своем списке
-  //поднять стейт изменения состояния кнопки сохранения из CardButton
-  // добавить к .then, чтобы состояние изменялось только при удачном сохранении
-  //тоже самое исправить в удалении карточки 
   const handleMovieSave = (movie) => {
     setIsLoading(true)
     api
