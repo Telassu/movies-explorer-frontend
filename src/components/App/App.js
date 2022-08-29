@@ -28,9 +28,9 @@ function App() {
   const allMovies = JSON.parse(localStorage.getItem('allMovies'));
 
   //состояние чекбокса
-  const [isChecked, setIsChecked] = useState(`${localStorage.getItem('lastCheckboxState') === null
-    ? true
-    : JSON.parse(localStorage.getItem('lastCheckboxState'))
+  const [isChecked, setIsChecked] = useState(`${localStorage.getItem('lastCheckboxState')
+    ? JSON.parse(localStorage.getItem('lastCheckboxState'))
+    : true
     }`);
   //состояние лоадера
   const [isLoading, setIsLoading] = useState(false);

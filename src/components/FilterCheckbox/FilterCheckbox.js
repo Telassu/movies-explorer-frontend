@@ -12,7 +12,7 @@ function FilterCheckbox({
     handleShortMovies();
     checkboxActive(!isChecked)
   }
-  console.log(isChecked)
+
   return (
     <label className="checkbox__label"
     >

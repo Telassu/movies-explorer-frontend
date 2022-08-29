@@ -19,8 +19,7 @@ function MoviesCardlist({
   pageSavedMovies,
   savedMovies,
   isSaveMovieIcon,
-  setIsSaveMovieIcon,
-  setShownMovies
+  setIsSaveMovieIcon
 }) {
   const size = useWindowSize();
   const [addCardsRow, setAddCardsRow] = useState(QUANTITY_CARDS_DESKTOP);
