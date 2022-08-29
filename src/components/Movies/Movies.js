@@ -26,8 +26,6 @@ function Movies(props) {
       .finally(() => props.setIsLoading(false));
   }, []);
 
-  console.log(localStorage)
-
   //результаты последнего поиска
   useEffect(() => {
     const lastSearchedMovies = JSON.parse(localStorage.getItem("searchMovies"));
@@ -44,7 +42,6 @@ function Movies(props) {
         } else {
           props.setIsNotMovies(false)
           props.setShownMovies(lastShortMovies)
-          console.log('все коротко')
         }
       } else {
         if (lastSearchedMovies.length === 0) {
@@ -52,13 +49,12 @@ function Movies(props) {
         } else {
           props.setIsNotMovies(false)
           props.setShownMovies(lastSearchedMovies)
-          console.log(lastSearchedMovies)
-          console.log('все длинно')
         }
       }
     }
   }, [])
 
+  console.log(localStorage)
 
   return (
     <>

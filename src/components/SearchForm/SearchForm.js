@@ -69,7 +69,7 @@ function SearchForm({ setIsLoading, movies, setMovies, setIsNotMovies, pageSaved
       if (isChecked) {
         setMovies(filterDuration(shownMovies))
       } else {
-        searchMovies(isSearch)
+        setMovies(JSON.parse(localStorage.getItem("searchMovies")))
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
