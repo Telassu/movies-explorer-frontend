@@ -56,7 +56,7 @@ class Api {
         year: movie.year ? movie.year : "Год не указан",
         description: movie.description ? movie.description : "Описание не указано",
         image: `https://api.nomoreparties.co/${movie.image.url}`,
-        trailerLink: movie.trailerLink,
+        trailerLink: movie.trailerLink ? movie.trailerLink : "Трейлера нет",
         nameRU: movie.nameRU ? movie.nameRU : "Название не указано",
         nameEN: movie.nameEN ? movie.nameEN : "Назввание не указано",
         thumbnail: `https://api.nomoreparties.co/${movie.image.formats.thumbnail.url}`,
@@ -79,7 +79,8 @@ class Api {
 }
 
 export const api = new Api({
-  baseURL: `${window.location.protocol}${process.env.REACT_APP_API_URL}`,
+  baseURL: 'http://localhost:3001',
+  // `${window.location.protocol}${process.env.REACT_APP_API_URL}`,
   //'http://localhost:3001',
   headers: {
     'Accept': 'application/json',

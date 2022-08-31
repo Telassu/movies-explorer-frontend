@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 
-function Navigation(props) {
+function Navigation({ isLoggedIn }) {
 
   const [isOpenMenu, setIsOpenMenu] = useState(false);
 
@@ -12,10 +12,11 @@ function Navigation(props) {
   const handleCloseMenu = () => {
     setIsOpenMenu(false)
   }
+
   return (
     <>
       <section className="navigation">
-        {!props.isLoggedIn
+        {!isLoggedIn
           ? (
             <ul className="navigation__links navigation__links_not-login">
               <li className="navigation__button">

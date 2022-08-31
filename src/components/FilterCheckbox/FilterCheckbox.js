@@ -9,10 +9,10 @@ function FilterCheckbox({
 
   const handleToggle = () => {
     setIsChecked(!isChecked);
-    handleShortMovies();
     checkboxActive(!isChecked)
   }
 
+  //console.log(isChecked)
   return (
     <label className="checkbox__label"
     >

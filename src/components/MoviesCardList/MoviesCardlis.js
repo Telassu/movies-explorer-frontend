@@ -53,7 +53,7 @@ function MoviesCardlist({
       total: addCardsRow.total + addCardsRow.plus,
     })
   }
-
+  //  console.log(savedMovies)
   return (
     <section className="movies">
       <ul className="movies__list">

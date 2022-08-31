@@ -6,38 +6,55 @@ import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardlist from "../MoviesCardList/MoviesCardlis";
 import Preloader from "../Preloader/Preloader";
 
-function SavedMovies(props) {
+function SavedMovies({
+  isLoggedIn,
+  isLoading,
+  setIsLoading,
+  isNotMovies,
+  setIsNotMovies,
+  isChecked,
+  setIsChecked,
+  movies,
+  setShownMovies,
+  shownMovies,
+  onCardDelete,
+  onSearch
+}) {
   const pageSavedMovies = true;
 
   useEffect(() => {
-    props.setIsNotMovies(false)
-    props.setShownMovies(props.movies)
+    setIsNotMovies(false)
+    setIsChecked(false)
+    setShownMovies(movies)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
     <>
       <Header
-        isLoggedIn={props.isLoggedIn}
+        isLoggedIn={isLoggedIn}
       />
       <main className="saved-movies">
         <SearchForm
-          isLoading={props.isLoading}
-          setIsLoading={props.setIsLoading}
-          movies={props.movies}
-          setMovies={props.setShownMovies}
-          setIsNotMovies={props.setIsNotMovies}
+          isLoading={isLoading}
+          setIsLoading={setIsLoading}
+          movies={movies}
+          shownMovies={shownMovies}
+          setMovies={setShownMovies}
+          setIsNotMovies={setIsNotMovies}
+          isChecked={isChecked}
+          setIsChecked={setIsChecked}
           pageSavedMovies={pageSavedMovies}
-          isChecked={props.isChecked}
-          setIsChecked={props.setIsChecked}
+          onSearch={onSearch}
         />
-        {props.isLoading
+        {isLoading
           ? <Preloader /> : ''}
-        {props.isNotMovies
+        {isNotMovies
           ? <p className="movie-page__not-found">Ничего не найдено</p>
           : <MoviesCardlist
-            movies={props.movies}
-            onCardDelete={props.onCardDelete}
+            movies={shownMovies}
+            setShownMovies={setShownMovies}
+            onCardDelete={onCardDelete}
             pageSavedMovies={pageSavedMovies}
           />
         }

@@ -35,6 +35,7 @@ function Profile(props) {
       name: values.name,
       email: values.email
     });
+    //добавить проверку на ошибки
     setIsActive(false);
   }
 
