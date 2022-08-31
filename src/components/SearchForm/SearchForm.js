@@ -3,7 +3,7 @@ import { useState } from "react";
 
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 
-import { filterDuration } from "../../utils/FilterMovies";
+import { filterDuration, filterMovies } from "../../utils/FilterMovies";
 
 function SearchForm({
   setIsLoading,
@@ -46,9 +46,9 @@ function SearchForm({
     } else {
       pageSavedMovies
         ? setMovies(movies)
-        : JSON.parse(localStorage.getItem("searchMovies")).length === 0
+        : filterMovies(movies, isSearch) === 0
           ? setIsNotMovies(true)
-          : setMovies(JSON.parse(localStorage.getItem("searchMovies")));
+          : setMovies(filterMovies(movies, isSearch));
     }
   }
 

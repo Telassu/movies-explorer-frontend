@@ -54,6 +54,7 @@ function App() {
         .then(([userInfo, InitialMovies]) => {
           setCurrentUser(userInfo);
           setSavedMovies(InitialMovies)
+          setShownSavedMovies(InitialMovies)
           localStorage.setItem("InitialMovies", JSON.stringify(InitialMovies))
         })
         .catch((err) => console.log("ERROR! =>", err));
@@ -71,7 +72,6 @@ function App() {
       .catch((err) => {
         console.log("ERROR! =>", err);
         setIsLoggedIn(false);
-        history.push("/signin");
       });
   }, [history])
 
@@ -195,7 +195,8 @@ function App() {
       .deleteMovie(movieId)
       .then(() => {
         const newList = savedMovies.filter((element) => element._id !== movieId);
-        setSavedMovies(newList);
+        setSavedMovies(newList)
+        setShownSavedMovies(newList);
       })
       .catch((err) => console.log("ERROR =>", err))
       .finally(() => setIsLoading(false));

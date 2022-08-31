@@ -25,7 +25,6 @@ function SavedMovies({
   useEffect(() => {
     setIsNotMovies(false)
     setIsChecked(false)
-    setShownMovies(movies)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 

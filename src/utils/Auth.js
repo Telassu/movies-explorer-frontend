@@ -1,4 +1,4 @@
-const baseURL = 'http://localhost:3001'
+const baseURL = `${window.location.protocol}${process.env.REACT_APP_API_URL}`;
 //`${window.location.protocol}${process.env.REACT_APP_API_URL}`;
 //'http://localhost:3001'
 
