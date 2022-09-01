@@ -33,12 +33,7 @@ function App() {
   const [isNotMovies, setIsNotMovies] = useState(false);
 
   //состояние чекбокса
-  const [isChecked, setIsChecked] = useState(`${localStorage.getItem('lastCheckboxState')
-    ? JSON.parse(localStorage.getItem('lastCheckboxState'))
-    : true || null
-      ? true
-      : false
-    }`);
+  const [isChecked, setIsChecked] = useState(null);
   //состояние лоадера
   const [isLoading, setIsLoading] = useState(false);
   //сообщение для пользователя об ошибках сервера
@@ -48,7 +43,7 @@ function App() {
   const [isDisabledButton, setIsDisabledButton] = useState(false)
 
   const history = useHistory();
-
+  console.log(Boolean(!isChecked))
   //получение информации о пользователе
   useEffect(() => {
     if (isLoggedIn) {
@@ -208,7 +203,7 @@ function App() {
   const searchMovies = (title) => {
     const shortMovies = filterDuration(allMovies)
     setIsNotMovies(false)
-    if (isChecked) {
+    if (Boolean(isChecked)) {
       const shortResult = filterMovies(shortMovies, title)
       if (shortResult.length === 0) {
         setIsNotMovies(true)
