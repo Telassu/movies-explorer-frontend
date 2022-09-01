@@ -67,8 +67,6 @@ function App() {
       .then((res) => {
         if (res) {
           setIsLoggedIn(true);
-          //localStorage.setItem('IsLoggedIn', true)
-          //          history.push("/");
         }
       })
       .catch((err) => {
@@ -203,7 +201,7 @@ function App() {
       .catch((err) => console.log("ERROR =>", err))
       .finally(() => setIsLoading(false));
   }
-  console.log(isChecked)
+
   // поиск по Фильмам
   const searchMovies = (title) => {
     const shortMovies = filterDuration(allMovies)
