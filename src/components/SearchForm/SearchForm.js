@@ -23,6 +23,7 @@ function SearchForm({
 
   useEffect(() => {
     const lastMovieRequest = JSON.parse(localStorage.getItem("lastMoviesRequest"));
+
     if (pageSavedMovies) {
       setIsSearch('');
 
