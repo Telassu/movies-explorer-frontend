@@ -71,7 +71,7 @@ function App() {
       })
       .catch((err) => {
         console.log("ERROR! =>", err);
-        setIsLoggedIn(false);
+        setIsLoggedIn(false)
       });
   }, [history])
 
