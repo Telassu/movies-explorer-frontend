@@ -162,17 +162,20 @@ function App() {
   useEffect(() => {
     if (isLoggedIn) {
       setIsLoading(true);
-      moviesApi
-        .getAllMovies()
-        .then((movies) => {
-          localStorage.setItem('allMovies', JSON.stringify(movies))
-        })
-        .catch((err) => {
-          console.log("ERROR! =>", err);
-          setIsErrorMessage('Во время запроса проишла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте еще раз');
-        })
-        .finally(() => setIsLoading(false));
-    }
+      if (localStorage.getItem("allMovies")) {
+        JSON.parse(localStorage.getItem("allMovies"))
+      } else {
+        moviesApi
+          .getAllMovies()
+          .then((movies) => {
+            localStorage.setItem('allMovies', JSON.stringify(movies))
+          })
+          .catch((err) => {
+            console.log("ERROR! =>", err);
+            setIsErrorMessage('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте еще раз');
+          })
+      }
+    } setIsLoading(false)
   }, [isLoggedIn]);
 
   // сохранение фильма в своем списке
