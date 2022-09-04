@@ -17,6 +17,12 @@
   align-items: center;
 }
 
+.search__line {
+  width: 100%;
+  height: 50px;
+  box-sizing: border-box;
+}
+
 .search__input {
   width: 100%;
   height: 50px;
@@ -29,6 +35,17 @@
   line-height: 18px;
   box-sizing: border-box;
   padding: 20px 16px;
+}
+
+.search__input:focus {
+  outline: 1px solid #3ddc84;
+}
+
+.search__input-error {
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 12px;
+  color: #ee3465;
 }
 
 .search__button {

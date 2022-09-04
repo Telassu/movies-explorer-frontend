@@ -1,17 +1,32 @@
 import React, { useState } from "react";
 
-import Example from "../../images/example_movie.png";
 import CardButton from "../CardButton/CardButton";
 
-function MoviesCard() {
-  const [isButton, setIsButton] = useState(true);
+function MoviesCard({
+  movie,
+  onCardSaved,
+  onCardDelete,
+  pageSavedMovies,
+  savedMovies
+}) {
+  const baseURL = 'https://api.nomoreparties.co';
+
+  const [isButtonHidden, setIsButtonHidden] = useState(true);
+
+  const isSaved = movie.id && savedMovies.some(el => el.movieId === movie.id);
 
   const showButton = () => {
-    setIsButton(false)
+    setIsButtonHidden(false)
   }
 
   const hideButton = () => {
-    setIsButton(true)
+    setIsButtonHidden(true)
+  }
+
+  function getTime(duration) {
+    const hours = Math.trunc(duration / 60);
+    const min = duration % 60;
+    return hours + 'ч ' + min + 'м';
   }
 
   return (
@@ -20,18 +35,28 @@ function MoviesCard() {
         onMouseOver={showButton}
         onMouseOut={hideButton}
       >
-        <img
-          className="movie__image"
-          src={Example} alt="film"
-        />
+        <a href={movie.trailerLink} target="_blank" rel="noreferrer">
+          <img
+            className="movie__image"
+            src={movie.image.url ? `${baseURL}/${movie.image.url}` : movie.image}
+            alt={movie.nameRU}
+          />
+        </a>
         <div className="movie__subtitle">
-          <p className="movie__name">33 слова о дизайне</p>
-          <div className="movie__time-container">1ч 17м</div>
+          <p className="movie__name">{movie.nameRU}</p>
+          <div className="movie__time-container">{getTime(movie.duration)}</div>
         </div>
-        <div className={`${isButton ? `movie__button_hidden` : ` `}`}>
-          <CardButton />
+        <div className="movie__button">
+          <CardButton
+            movie={movie}
+            onCardSaved={onCardSaved}
+            onCardDelete={onCardDelete}
+            isSaved={isSaved}
+            pageSavedMovies={pageSavedMovies}
+            savedMovies={savedMovies}
+            isButtonHidden={isButtonHidden}
+          />
         </div>
-
       </li>
     </>
   );

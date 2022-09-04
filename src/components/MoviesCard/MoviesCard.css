@@ -1,4 +1,4 @@
-.movie{
+.movie {
   height: 231px;
   width: 360px;
   box-sizing: border-box;
@@ -9,7 +9,7 @@
   position: relative;
 }
 
-.movie__image{
+.movie__image {
   height: 201px;
   width: 360px;
   border-radius: 6px;
@@ -19,21 +19,14 @@
   cursor: pointer;
 }
 
-.movie__button_hidden{
-  visibility: hidden;
-  position: absolute;
-  top: 14px;
-  right: 14px;
-}
-
-.movie__subtitle{
+.movie__subtitle {
   width: 100%;
   display: flex;
   justify-content: space-between;
-  margin-top: 14px;
+  margin-top: 11px;
 }
 
-.movie__name{
+.movie__name {
   font-weight: 500;
   font-size: 13px;
   line-height: 16px;
@@ -55,11 +48,11 @@
 }
 
 @media screen and (max-width: 350px) {
-  .movie__image{
+  .movie__image {
     height: 168px;
     width: 300px;
   }
-  
+
   .movie {
     width: calc(100% - 20px);
   }

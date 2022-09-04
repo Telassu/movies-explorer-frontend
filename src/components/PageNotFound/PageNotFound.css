@@ -24,7 +24,8 @@
   font-weight: 400;
   font-size: 14px;
   line-height: 17px;
-  text-decoration: none;
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
   color: #4285f4;
 }
 
